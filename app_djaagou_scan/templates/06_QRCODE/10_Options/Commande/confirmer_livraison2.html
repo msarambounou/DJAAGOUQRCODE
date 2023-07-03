@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Modifier menu</title>
+    </head>
+
+    <header>
+        {% include '00_Layout/header.html' %}
+    </header>
+    <body style="background-color: rgba(239,239,239,0.84)">
+        <section class="vh-100">
+            <div class="container py-5 h-100">
+                <div class="row d-flex align-items-center justify-content-center h-100" class="container py-5 h-100">
+                    <div class="col-md-7 col-lg-5 col-xl-5 offset-xl-1" style="box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px; margin-left: 5%; margin-right: 5%; margin-bottom: 5%; margin-top: 10%; background-color: white; padding : 3% 3% 3% 3%">
+                        <h3 style="text-align: center">COMMANDE</h3>
+                        </br>
+                        {% include '07_Message/messages.html' %}
+                        <form action="/confirmer_livraison/{{ id_commande }}" method="POST" enctype="multipart/form-data"> {% csrf_token %}
+                            <fieldset disabled>
+                                <div class="form-group">
+                                    <p for="exampleInputEmail1"><b>Numéro table : </b>{{ current_numero_table }}</p>
+                                </div>
+
+                                <div class="form-group">
+                                    <p for="exampleInputEmail1"><b>Nom du client :</b> {{ current_custumer_name }}</p>
+                                </div>
+
+                                <div class="form-group">
+                                    <p for="exampleInputEmail1"><b>Commande : </b></p>
+                                    {% for achat in achats %}
+                                        {% for article in articles %}
+                                            {% if article.id == achat.id_menu %}
+                                                <div style="padding-left: 5%">
+                                                    <li>{{ article.nom_article }} x{{ achat.quantite }}</li>
+                                                </div>
+                                            {% endif %}
+                                        {% endfor %}
+                                    {% endfor %}
+                                </div>
+
+                                <div class="form-group">
+                                    <p for="exampleInputEmail1"><b>Prix total : </b> X </p>
+                                </div>
+                            </fieldset>
+                            <button type="submit" style="width: 100%" class="btn btn-primary">Confirmer</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </body>
+
+<footer>
+    {% include '00_Layout/footer2b.html' %}
+</footer>
+</html>

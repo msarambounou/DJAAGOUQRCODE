@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Title</title>
+        {% load static %}
+    </head>
+
+    <header>
+        {% include '00_Layout/header.html' %}
+    </header>
+    <body style="background-color: rgba(225,225,225,0.84)">
+        <div class="container py-5 h-100">
+            <div class="row d-flex align-items-center justify-content-center h-100" class="container py-5 h-100" style="padding-top: 5%">
+                <div class="col-md-7 col-lg-5 col-xl-5 offset-xl-1" style="box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px; padding-left: 5%; padding-right: 5%; padding-bottom: 5%; padding-top: 5%;background-color: white">
+                    <img src="{%static "image/authentification/connexion.png" %}" class="img-fluid" alt="Phone image" style="width: 80%; display: block; margin-left: auto; margin-right: auto">
+                    {% include '07_Message/messages.html' %}
+                    <form action="/connexion/" method="POST" style="padding-top: 5%"> {% csrf_token %}
+                        <!-- Email input -->
+                        <div class="form-outline mb-4">
+                            <label class="form-label" for="form1Example13">Email</label>
+                            <input type="email" id="form1Example13" name="email" class="form-control form-control-lg" placeholder="Entrez votre email" required/>
+                            <p id="email_error" class="text-danger"></p>
+                        </div>
+
+                        <!-- Password input -->
+                        <div class="form-outline mb-4">
+                            <label class="form-label" for="form1Example23">Mot de passe</label>
+                            <input type="password" id="form1Example23" name="password" class="form-control form-control-lg" placeholder="Entrez votre mot de passe" required/>
+                        </div>
+
+                        <div class="d-flex justify-content-around align-items-center mb-4">
+                            <!-- Checkbox -->
+                            <a href="/mot_de_passe_oublie/">Mot de passe oublié ?</a>
+                        </div>
+                        <!-- Submit button -->
+                        <button type="submit" class="btn btn-primary btn-lg btn-block">Se connecter</button>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
+
+{% include '00_Layout/footer2.html' %}

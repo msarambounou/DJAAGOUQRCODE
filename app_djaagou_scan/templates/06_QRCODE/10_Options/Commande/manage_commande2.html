@@ -1,0 +1,88 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Title</title>
+    </head>
+    <header>
+        {% include '00_Layout/header.html' %}
+    </header>
+    <body style="">
+
+    <div style="padding-top: 8%; padding-left: 2%">
+        <h1><img width="60px" src="{% static 'image/Option_commande/suivi.png' %}">Gérer les commandes</h1>
+    <div style="display: flex">
+        {% for this_commande in distinct_commandes %}
+            {% for commande in commandes %}
+                {% if commande.id_commande == this_commande %}
+        <div style="display: flex; padding-top: 2%; padding-right: 3%">
+            <div style="background-color: #ffb12e; padding-right: 3%">
+                <div class="card-header" style="text-align: center">
+                    <b>TABLE {{ commande.numero_table }}</b>
+                </div>
+
+                <div class="card-body">
+                    <div style="display: flex">
+                        <p><b>NOM : </b></p>
+                        <p>{{ commande.custumer_name }}</p>
+                    </div>
+
+                    <div>
+                        <p><b>COMMANDES : </b></p>
+                        {% for achat in achats %}
+                            {% for article in articles %}
+                            {% if achat.id_commande == this_commande %}
+                                {% if achat.id_menu == article.id %}
+                                <li>{{ article.nom_article }} x{{ achat.quantite }}</li>
+                                    {% endif %}
+                            {% endif %}
+                            {% endfor %}
+
+                            {% endfor %}
+                        {% endif %}
+                        {% endfor %}
+                    </div>
+
+                    </br>
+
+                    <div style="display: flex">
+                        <p><b>STATUT : </b></p>
+                        <p>NON</p>
+                    </div>
+
+                    <button style="width: 100%" type="button" class="btn btn-outline-light" data-toggle="modal" data-target="#modal_confirmer_livraison">Confirmer livraison </button>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+        </div>
+    </div>
+
+    </body>
+</html>
+
+
+
+<div class="modal fade" id="modal_confirmer_livraison" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Message</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+
+            <div class="modal-body">
+                <form action="#" method="POST" enctype="multipart/form-data"> {% csrf_token %}
+                    <p>Voulez-vous vraiment confirmer ?</p>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary">Confirmer</button>
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">Annuler</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

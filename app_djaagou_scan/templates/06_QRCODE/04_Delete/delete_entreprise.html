@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+    {% load static %}
+    <head>
+        <meta charset="UTF-8">
+        <title>Supprimer entreprise</title>
+    </head>
+
+    <header>
+        {% include '00_Layout/header.html' %}
+    </header>
+<body>
+    <section>
+         <div class="container py-5 h-100">
+                <div class="row d-flex align-items-center justify-content-center h-100">
+                    <div class="col-md-8 col-lg-7 col-xl-6">
+                        <h3>Modifier l'entreprise : {{ entreprise.nom_ets }}</h3>
+                        </br></br>
+                        <img style="width: 300px;" src="{{ entreprise.logo_ets }}" class="img-fluid" alt="Phone image">
+                    </div>
+                    <div class="col-md-7 col-lg-5 col-xl-5 offset-xl-1">
+                        <form method="POST" enctype="multipart/form-data"> {% csrf_token %}
+                            <fieldset disabled>
+
+                                <div class="form-group">
+                                    <label for="exampleInputEmail1">Nom de l'entreprise</label>
+                                    <input type="text" class="form-control" name="name_ets" value="{{ entreprise.nom_ets }}" required>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="exampleFormControlSelect1">Secteur</label>
+                                    <input type="text" class="form-control" name="categorie_ets" value="{{ entreprise.secteur }}" required>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="exampleFormControlFile1">Logo</label>
+                                    </br>
+                                    <img style="width: 73px;" src="{{ entreprise.logo_ets }}" class="img-fluid">
+                                </div>
+                                </fieldset>
+                                <button class="btn btn-danger" data-toggle="modal" data-target="#modal_delete_entreprise">Supprimer</button>
+                        </form>
+
+                    </div>
+                </div>
+         </div>
+    </section>
+
+        <div class="modal fade" id="modal_generate_button" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLongTitle">Supprimer entreprise</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+
+                    <div class="modal-body">
+                        <form action="/manage_entreprise/delete_entreprise/{{ entreprise.id }}" method="POST" enctype="multipart/form-data"> {% csrf_token %}
+                            <p>Voulez-vous vraiment supprimer cette entreprise</p>
+                            <div class="modal-footer">
+                                <button type="submit" class="btn btn-danger">Confirmer</button>
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+</body>

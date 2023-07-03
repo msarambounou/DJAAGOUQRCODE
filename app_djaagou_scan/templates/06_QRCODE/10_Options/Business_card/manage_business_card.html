@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="fr">
+    <head>
+        <meta charset="UTF-8">
+        <title>Gestion reseau sociaux</title>
+        {% load static %} <link rel= "stylesheet" type= "text/css" href= "{% static "style/style_img_bc.css" %}">
+    </head>
+
+    <header>
+        {% include '00_Layout/header.html' %}
+    </header>
+
+    <body>
+
+    <div style="margin-left: 2%; margin-top: 8%; margin-right: 2%; margin-bottom: 2%">
+            <h1><ion-icon name="business-outline"></ion-icon> Gérer mes réseaux sociaux</h1>
+
+        <div style="margin-top: 3%; display: block; margin-left: auto; margin-right: auto;">
+            <button type="button" class="btn btn-outline-dark" data-toggle="modal" data-target="#modal_add_reseau_social_bs">
+                Ajouter un élément
+            </button>
+
+            <a href="/mes_reseaux_sociaux/{{ user.id }}">
+                <button type="button" class="btn btn-outline-success">
+                    Consulter ma page
+                </button>
+            </a>
+        </div>
+    </div>
+
+    {% if len_bs_social_media == 0 %}
+            <div style="margin-top: 2%; margin-left: 2%; margin-bottom: 20%">
+                <p style="color: red">Vous n'avez aucun élément</p>
+            </div>
+        {% else %}
+
+        <div style="width:95%; padding-left:3% ;padding-right:3%; margin-bottom: 9%">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th scope="col">Logo</th>
+                        <th scope="col">Réseau sociaux</th>
+                        <th scope="col">Lien</th>
+                        <th scope="col">Modifier</th>
+                        <th scope="col">Supprimer</th>
+                    </tr>
+                </thead>
+
+                {% for social_media in bs_social_media %}
+                    <tbody>
+                        <tr>
+                            <td><img style="width: 73px;" src="{{ social_media.path_logo }}" class="img-fluid"></td>
+                            <td>{{ social_media.name }}</td>
+                            <td><a href="{{ social_media.link }}">{{ social_media.link }}</a></td>
+                          <td>
+                              <a href="update_business_card/{{my_rs_link.id}}">
+                                  <button type="button" class="btn btn-warning">
+                                      <ion-icon name="create-outline"></ion-icon>
+                                  </button>
+                              </a>
+                          </td>
+                            <td>
+                              <a href="delete_business_card/{{my_rs_link.id}}">
+                                  <button type="button" class="btn btn-danger">
+                                      <ion-icon name="trash-outline"></ion-icon>
+                                  </button>
+                              </a>
+                            </td>
+                        </tr>
+                    </tbody>
+                {% endfor %}
+            </table>
+        </div>
+        {% endif %}
+    </body>
+
+    <footer>
+        {% include '00_Layout/footer2.html' %}
+    </footer>
+</html>
+
+            <!------  MODAL : Add Article ------>
+            <div class="modal fade" id="modal_add_reseau_social_bs" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLongTitle">Ajouter un élément</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            {% include '06_QRCODE/10_Options/Business_card/add_social_media.html' %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+</body>
+</html>

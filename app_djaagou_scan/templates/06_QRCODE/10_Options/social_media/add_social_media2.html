@@ -1,0 +1,72 @@
+<form action="/ajouter_reseau_social/{{ id_entreprise }}" method="POST" enctype="multipart/form-data"> {% csrf_token %}
+
+    <div class="form-group">
+        <label>Réseau social</label>
+        <select class="custom-select" name="name" onchange="showInput(this.value)" required>
+            <option value="choix">Choissiez un reseau social</option>
+            {% for social_media in all_social_media %}
+                <option value="{{ social_media.name }}">{{ social_media.name }}</option>
+            {% endfor %}
+        </select>
+    </div>
+
+    <div class="form-group" id="input_link_container" style="display: none;">
+        <label>Lien</label>
+        <input type="text" class="form-control" name="link" placeholder="Veuillez entrez le lien">
+    </div>
+
+    <div id="input_number_container" style="display: none;">
+        <label for="phone">Numéro de téléphone :</label>
+        </br>
+        <small style="color: red">Ecrivez direcetement le numéro sans l'indicateur</small>
+        </br>
+        <div class="input-group">
+            <div class="input-group-prepend" style="width: 20%">
+                <select class="custom-select" id="country" name="country">
+                  <!-- Les options seront ajoutées ici dynamiquement à l'aide de JavaScript -->
+              </select>
+            </div>
+            <input type="number" class="form-control" name="phone_number" id="phone" aria-describedby="phoneHelp">
+        </div>
+        </br>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Soumettre</button>
+</form>
+
+<script>
+    function showInput(value) {
+        if (value === "choix"){
+            document.getElementById("input_number_container").style.display = "none";
+            document.getElementById("input_link_container").style.display = "none";
+        }
+        else if (value === "WhatsApp" ) {
+          document.getElementById("input_number_container").style.display = "block";
+          document.getElementById("input_link_container").style.display = "none";
+
+        } else if (value === "Contact") {
+          document.getElementById("input_number_container").style.display = "block";
+          document.getElementById("input_link_container").style.display = "none";
+        } else {
+            document.getElementById("input_number_container").style.display = "none";
+            document.getElementById("input_link_container").style.display = "block";
+        }
+    }
+
+    fetch("https://restcountries.com/v2/all")
+        .then(response => response.json())
+        .then(countries => {
+        // Récupérer la liste déroulante
+            const select = document.querySelector("#country");
+
+
+        // Boucle sur les pays et ajoutez chaque option à la liste déroulante
+        countries.forEach(country => {
+            const option = document.createElement("option");
+            option.value = country.code;
+            option.text = country.name;
+            select.appendChild(option);
+        });
+    });
+
+</script>

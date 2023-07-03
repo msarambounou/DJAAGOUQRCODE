@@ -1,0 +1,42 @@
+<!-- MODAL ------>
+<div class="modal fade" id="modal_update_table" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Action table</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form action="#" method="POST" enctype="multipart/form-data"> {% csrf_token %}
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Numéro de  la table</label>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
+                            <label class="form-check-label" for="flexRadioDefault1">
+                                {{ table.numero_table }}
+                            </label>
+                        </div>
+                    </div>
+
+                     <div class="form-group">
+                        <label for="exampleInputEmail1">Nombre de place</label>
+                        <input type="number" class="form-control" name="nb_places" value="" placeholder="Entrer le nombre de place sur la table" required>
+                     </div>
+
+
+                    <div class="form-group">
+                        <label>Statut</label>
+                        <select class="custom-select" name="statut" required>
+                            <option>Disponible</option>
+                            <option>Indisponible</option>
+                        </select>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">Confirmer</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

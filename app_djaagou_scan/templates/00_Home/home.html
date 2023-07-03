@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html>
+    {% load static %}
+    <head>
+        <meta charset="UTF-8">
+        <title>Accueil</title>
+        <link rel="shortcut icon" href="{% static 'image/favicon-16x16.png' %}"/>
+    </head>
+
+    <body>
+
+        {% include "00_Layout/header.html" %}
+
+
+        <div style="width: 30%">{% include "07_Message/messages.html" %}</div>
+
+        <div class="hero-image">
+            <div class="hero-text">
+                <h1 style="font-size:50px; font-family: Rockwell">Menu digital QR Code pour votre activité</h1>
+                <p>Offrez une expérience sans contact à vos clients et faites gagner du temps à vos serveurs grâce à un menu digital sur smartphone à scanner avec un QR Code. <b>MY QRCODE SOLUTIONS</b> vous sert de générateur de QR code pour vos cartes de restaurant à flasher.</p>
+            </div>
+        </div>
+
+        <div style="background-color: white; padding-top: 5%; padding-bottom: 8%; padding-left: 2.5%">
+            <h1 id="block_title">COMMENT ÇA MARCHE ?</h1>
+
+            <div style="display: flex; justify-content: start;">
+                <div style="margin-right: 8%; margin-left: 3%; padding-top: 3%">
+                    <h2 id="title_client_resto">Pour les clients</h2>
+                    <p id="liste_ccm">
+                        </br>
+                        <b>1.</b> Ouvrez l'application appareil photo sur votre smartphone.</br>
+                        <b>2.</b> Dirigez la caméra vers le code QR.</br>
+                        <b>3.</b> Assurez-vous que le code se trouve dans le champ de vision de la caméra et qu'il est bien éclairé. </br>
+                        <b>4.</b> Attendez que le code soit reconnu par la caméra. </br>
+                        <b>5.</b> Une notification ou un message peut apparaître sur votre écran, indiquant que le code a été scanné. </br>
+                        <b>6.</b> Suivez les instructions fournies par la notification ou le message.</br>
+                        <b>7.</b> Cela inclura l'ouverture d'un site Web qui affichera le menu
+
+                    </p>
+                </div>
+                <div style="padding-top: 1%">
+                    <img width="350;" height="350" style="clip-path:ellipse(50% 50%);" src="{%static "image/accueil/for_customer.jpg" %}">
+                </div>
+            </div>
+
+            <div style="display: flex; justify-content: flex-end; margin-right: 10%">
+                <div style="padding-top: 8%">
+                    <img width="450px;" style="border-radius: 35%;" src="{%static "image/accueil/for_restaurant.jpg" %}">
+                </div>
+
+                <div style="padding-left: 10%; padding-right:10%; padding-top: 8%">
+                    <h2 id="title_client_resto">
+                        Pour les restaurants</h2>
+                    <p id="liste_ccm">
+                        </br>
+                        <b>1.</b> Ouvrez l'application appareil photo sur votre smartphone.</br>
+                        <b>2.</b> Dirigez la caméra vers le code QR.</br>
+                        <b>3.</b> Assurez-vous que le code se trouve dans le champ de vision de la caméra et qu'il est bien éclairé. </br>
+                        <b>4.</b> Attendez que le code soit reconnu par la caméra. </br>
+                        <b>5.</b> Une notification ou un message peut apparaître sur votre écran, indiquant que le code a été scanné. </br>
+                        <b>6.</b> Suivez les instructions fournies par la notification ou le message.</br>
+                        <b>7.</b> Cela inclura l'ouverture d'un site Web qui affichera le menu
+
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div id="div_avantages" style="padding-top: 8%; padding-left: 2.5%; background-color: #f6f6f6">
+            <h1 id="block_title">LES AVANTAGES</h1>
+
+            <div id="div_avantages_block" style="display: flex; justify-content: space-between;padding-top: 2.5%; padding-bottom: 5%">
+                <div>
+                    <div style="display: flex">
+                        <div style="padding-right: 2%; ">
+                            <img width="40px" src="{% static 'image/true.png' %}">
+                        </div>
+
+                        <div style="display: block">
+                            <b>Commande sans contact:</b>
+                            <p>Les clients peuvent scanner le code QR pour accéder au menu et passer leurs commandes sans avoir à interagir physiquement avec un menu ou un serveur.</p>
+                        </div>
+                    </div>
+
+                    <div style="display: flex">
+                        <div style="padding-right: 2%;">
+                            <img width="40px" src="{% static 'image/true.png' %}">
+                        </div>
+
+                        <div style="display: block">
+                            <b>Commande sans contact:</b>
+                            <p>Les clients peuvent scanner le code QR pour accéder au menu et passer leurs commandes sans avoir à interagir physiquement avec un menu ou un serveur.</p>
+                        </div>
+
+                    </div>
+                    <div style="display: flex">
+                        <div style="padding-right: 2%; ">
+                            <img width="40px" src="{% static 'image/true.png' %}">
+                        </div>
+
+                        <div style="display: block">
+                            <b>Commande sans contact:</b>
+                            <p>Les clients peuvent scanner le code QR pour accéder au menu et passer leurs commandes sans avoir à interagir physiquement avec un menu ou un serveur.</p>
+                        </div>
+
+                    </div>
+                    <div style="display: flex">
+                        <div style="padding-right: 2%; ">
+                            <img width="40px" src="{% static 'image/true.png' %}">
+                        </div>
+
+                        <div style="display: block">
+                            <b>Commande sans contact:</b>
+                            <p>Les clients peuvent scanner le code QR pour accéder au menu et passer leurs commandes sans avoir à interagir physiquement avec un menu ou un serveur.</p>
+                        </div>
+                    </div>
+
+                    <!--<div style="display: flex">
+                        <div style="padding-right: 2%;">
+                            <img width="40px" src="{% static 'image/true.png' %}">
+                        </div>
+
+                        <div style="display: block">
+                            <b>Commande sans contact:</b>
+                            <p>Les clients peuvent scanner le code QR pour accéder au menu et passer leurs commandes sans avoir à interagir physiquement avec un menu ou un serveur.</p>
+                        </div>
+
+                    </div>-->
+                </div>
+
+                <div>
+                    <div style="display: flex">
+                        <div style="padding-right: 2%; ">
+                            <img width="40px" src="{% static 'image/true.png' %}">
+                        </div>
+
+                        <div style="display: block">
+                            <b>Commande sans contact:</b>
+                            <p>Les clients peuvent scanner le code QR pour accéder au menu et passer leurs commandes sans avoir à interagir physiquement avec un menu ou un serveur.</p>
+                        </div>
+
+                    </div>
+
+                    <div style="display: flex">
+                        <div style="padding-right: 2%; ">
+                            <img width="40px" src="{% static 'image/true.png' %}">
+                        </div>
+
+                        <div style="display: block">
+                            <b>Commande sans contact:</b>
+                            <p>Les clients peuvent scanner le code QR pour accéder au menu et passer leurs commandes sans avoir à interagir physiquement avec un menu ou un serveur.</p>
+                        </div>
+
+                    </div>
+                    <div style="display: flex">
+                        <div style="padding-right: 2%; ">
+                            <img width="40px" src="{% static 'image/true.png' %}">
+                        </div>
+
+                        <div style="display: block">
+                            <b>Commande sans contact:</b>
+                            <p>Les clients peuvent scanner le code QR pour accéder au menu et passer leurs commandes sans avoir à interagir physiquement avec un menu ou un serveur.</p>
+                        </div>
+
+                    </div>
+                    <div style="display: flex">
+                        <div style="padding-right: 2%; ">
+                            <img width="40px" src="{% static 'image/true.png' %}">
+                        </div>
+
+                        <div style="display: block">
+                            <b>Commande sans contact:</b>
+                            <p>Les clients peuvent scanner le code QR pour accéder au menu et passer leurs commandes sans avoir à interagir physiquement avec un menu ou un serveur.</p>
+                        </div>
+
+                    </div>
+
+                    <!--<div style="display: flex">
+                        <div style="padding-right: 2%; ">
+                            <img width="40px" src="{% static 'image/true.png' %}">
+                        </div>
+
+                        <div style="display: block">
+                            <b>Commande sans contact:</b>
+                            <p>Les clients peuvent scanner le code QR pour accéder au menu et passer leurs commandes sans avoir à interagir physiquement avec un menu ou un serveur.</p>
+                        </div>
+                    </div>-->
+                </div>
+            </div>
+
+            </div>
+        </div>
+    </body>
+<footer>
+    {% include '00_Layout/footer2.html' %}
+</footer>
+</html>
+<!-- https://www.projectlibre.com -->
+<!-- https://www.w3schools.com/css/css_image_gallery.asp -->
+
+<style>
+body, html {
+  height: 100%;
+  margin: 0;
+}
+
+.hero-image {
+  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("{% static 'image/image_couverture.png' %}");
+  height: 100%;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: relative;
+}
+
+.hero-text {
+  text-align: center;
+  position: absolute;
+  top: 46%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+  font-family: Arial, Helvetica, sans-serif;
+}
+#div_avantages_block p{
+    color: grey;
+    font-family: Geneva;
+}
+
+#div_avantages_block b{
+    font-family: "Gill Sans";
+    font-size: 20px;
+
+}
+
+#block_title{
+    font-family: Rockwell;
+    font-size: 45px;
+}
+
+#title_client_resto{
+    font-size: 35px;
+    font-family: "Gill Sans";
+    background-image: linear-gradient(120deg, #818181 0%, #f1f1f1 100%);
+    background-repeat: no-repeat;
+    background-size: 50% 0.20em;
+    background-position: 0 88%;
+    transition: background-size 0.25s ease-in;
+}
+
+#liste_ccm {
+    font-family: 'Gill Sans';
+    font-size: 19px;
+}
+
+</style>

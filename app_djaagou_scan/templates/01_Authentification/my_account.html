@@ -1,0 +1,113 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Title</title>
+    </head>
+    {% include '00_Layout/header.html' %}
+    <body>
+       <div style="padding-left: 2%; margin-top: 8%; padding-right: 2%; padding-bottom:5%; display: block; margin-left: auto; margin-right: auto">
+           <div style="padding-left: 2%; margin-top: 8%; padding-right: 2%">
+               <h1><ion-icon name="person-circle-outline"></ion-icon> Gérer mon compte</h1>
+           </div>
+
+           <div style="padding-top: 2%; padding-bottom: 2%; width: 80%; display: block; margin-left: auto; margin-right: auto">
+               <h4><ion-icon name="lock-closed-outline"></ion-icon> Confidentialité</h4>
+               <div style="box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;">
+                   <table class="table table-hover">
+                        <tr>
+                            <th scope="col">Prénom</th>
+                            <td>{{ user.first_name }}</td>
+                            <td><a href="/modfifier_confidentialite/">Modifier</a></td>
+                        </tr>
+
+                        <tr>
+                            <th scope="col">Nom</th>
+                            <td>{{ user.last_name }}</td>
+                            <td><a href="/modfifier_confidentialite/">Modifier</a></td>
+                        </tr>
+
+                        <tr>
+                            <th scope="col">Email</th>
+                            <td>{{ user.email }}</td>
+                            <td><a href="#"></a></td>
+                        </tr>
+
+                        <tr>
+                            <th scope="col">Mot de passe</th>
+                            <td>**********</td>
+                            <td><a href="/modifier_mot_de_passe/">Modifier</a></td>
+                        </tr>
+                   </table>
+               </div>
+               </br>
+
+               <h4><ion-icon name="business-outline"></ion-icon> Mes entreprises</h4>
+               <div style="box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;">
+                   <table class="table table-hover" width="50%">
+                       <thead>
+                            <tr>
+                                <th scope="col">Nom</th>
+                                <th scope="col">Secteur</th>
+                                <th scope="col">Statut</th>
+                            </tr>
+                       </thead>
+                        <tbody>
+                        {% for entreprise in entreprises %}
+                            <tr>
+                                <td>{{ entreprise.nom_ets }}</td>
+                                <td>{{ entreprise.secteur }}</td>
+                                {% if entreprise.statut == 1 %}
+                                    <td><img style="width: 20px" src="{%static "image/true.png" %}"> Actif</td>
+                                {% else %}
+                                    <td><img style="width: 20px" src="{%static "image/false.png" %}"> Inactif</td>
+                                {% endif %}
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                   </table>
+                </div>
+
+               </br>
+
+               <h4>Mon abonnement</h4>
+               <div style="box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;">
+                   <table class="table table-hover" width="50%">
+                       <thead>
+                        <tr>
+                            <th scope="col">Abonnement</th>
+                            <th scope="col">Situations</th>
+                            <th scope="col">Type</th>
+                            <th scope="col">Date de souscription</th>
+                        </tr>
+                       </thead>
+
+                       <tbody>
+                       <tr>
+                           <td>SIMPLE</td>
+                           <td>Activé</td>
+                           <td>Annuelle</td>
+                           <td>01/01/2022</td>
+                       </tr>
+                       </tbody>
+                   </table>
+               </div>
+           </div>
+       </div>
+    </body>
+
+    <footer>
+        {% include '00_Layout/footer2.html' %}
+    </footer>
+</html>
+
+
+<script>
+    $(document).ready(function(){
+        $('[data-toggle="tooltip"]').tooltip();
+    });
+</script>
+
+

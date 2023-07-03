@@ -1,0 +1,140 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="fr">
+    <head>
+        <meta charset="UTF-8">
+        <title>Title</title>
+        <!----- LINK CSS BOOTSTRAP----->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+        <!----- SCRIPT JS ----->
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.3/dist/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+
+        <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+        <script nomodule src="h ttps://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+
+    </head>
+
+    <body>
+
+            </br>
+            <button style="float: right;" type="button" class="btn btn-warning position-relative">
+                <ion-icon name="basket-outline"></ion-icon>
+                Mon panier
+                <span style="color: white; width: 25px;"  class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                    1
+                </span>
+            </button>
+
+
+            <img class="img-fluid rounded-start" src="{{ entreprise.logo_ets }}" class="img-fluid" style="width: 250px; height: 200px; display: block; margin-left: auto; margin-right: auto;">
+
+            {% if user.is_authenticated %}
+                </br></br>
+                <div style="width: 30%" >
+                    {% include '07_Message/messages.html' %}
+                </div>
+
+                <button type="button" class="btn btn-outline-dark" data-toggle="modal" data-target="#modal_generate_button">Générer un QR-CODE (modal)</button>
+                <a href="/display_from_qrcode/{{ entreprise.id }}/generer_qrcode"><button type="button" class="btn btn-outline-dark">Générer un QR-CODE</button></a>
+            {% endif %}
+            </br>
+
+            {% for categorie in all_categorie_article %}
+                <div style="box-shadow: rgba(0, 0, 0, 0.15) 2.4px 2.4px 3.2px;">
+                    <h1 class="display-4" style="text-align: center">{{ categorie.nom_categorie_article }}</h1>
+                </div>
+
+                </br></br>
+                <div style="background-color: green">
+                {% for article in articles %}
+                    {% if article.nom_categorie == categorie.nom_categorie_article %}
+                        <div class="card" style="width: 18rem; display: inline-block; padding-right: 20px; padding-bottom: 20px;">
+                            <img class="img-fluid rounded-start" src="{{ article.image_path }}" class="img-fluid" style="width: 250px; height: 200px;">
+                            <div class="card-body">
+                            <h5 class="card-text">{{ article.nom_article }}</h5>
+                            <h6 class="text-muted">{{ article.nom_categorie }}</h6>
+                            <h6 class="text-muted">{{ article.prix }} €</h6>
+
+                            {% if article.description != "" %}
+                                <p class="card-text">{{ article.description }}</p>
+                            {% else %}
+                                <p style="color: white" class="card-text">PAS DE DESCRIPTION</p>
+                            {% endif %}
+                                <!--- IF ABONNEMENT OBTION COMMANDE -->
+                            <button type="button" class="btn btn-info" data-toggle="modal" data-target="#modal_add_commande"><ion-icon name="add-circle-outline"></ion-icon> Ajouter à ma commande</button>
+                        {% endif %}
+                            </div>
+                    </div>
+                {% endfor %}
+                </div>
+                </br></br></br></br>
+            {% endfor %}
+        </div>
+
+        <div class="modal fade" id="modal_generate_button" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLongTitle">Message</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form action="/display_from_qrcode2/{{ entreprise.id }}" method="POST" enctype="multipart/form-data"> {% csrf_token %}
+                            <p>Voulez-vous envoyé votre QR-CODE par mail ?</p>
+                            <div class="modal-footer">
+                                <button type="submit" class="btn btn-primary">Confirmer</button>
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="modal_add_commande" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLongTitle">Ajouter à ma commande</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form action="#" method="POST" enctype="multipart/form-data"> {% csrf_token %}
+
+                            <div class="form-group">
+                                <img src="{% static "IMAGE_TO_UPLOAD/fanta.jpeg" %}" alt="Cinque Terre" width="200" height="150">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">Quantité</label>
+                                <input type="number" class="form-control" id="price" name="price" placeholder="Entrez la quantité" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">Numéro de la table</label>
+                                <input type="number" class="form-control" id="price" name="price" placeholder="Entrez le numéro de la table" required>
+                            </div>
+
+                            <div class="modal-footer">
+                                <button type="submit" class="btn btn-primary">Confirmer</button>
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    </body>
+</html>
+
+
+

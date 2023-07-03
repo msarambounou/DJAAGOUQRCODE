@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="fr">
+    <head>
+        <meta charset="UTF-8">
+        <title>Gestion des historiques</title>
+        {% load static %}
+    </head>
+
+    <header>
+        {% include '00_Layout/header.html' %}
+    </header>
+
+    <body>
+
+        <div style="width:80%; padding-left: 2%;padding-right: 2%; padding-bottom: 15%">
+
+            <div style="padding-left: 2%; padding-top: 10%; padding-right: 2%">
+                <h1><img width="50px" src="{% static 'image/historique/lhistoire.png' %}"> Gérer mes historiques</h1>
+            </div>
+
+             <div style="padding-left: 2%; padding-top: 2%; padding-right: 2%">
+                 <div class="list-group">
+                     <a href="/historique_entreprise/" class="list-group-item list-group-item-action">Entreprises</a>
+                     <a href="/historique_categorie/" class="list-group-item list-group-item-action">Catégories</a>
+                     <a href="/historique_article/" class="list-group-item list-group-item-action">Menus</a>
+                 </div>
+             </div>
+        </div>
+
+    <footer>
+        {% include '00_Layout/footer2.html' %}
+    </footer>
+    </body>

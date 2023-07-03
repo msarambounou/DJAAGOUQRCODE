@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Gestion des menus</title>
+    {% load static %}
+</head>
+<header>
+    {% include '00_Layout/header.html' %}
+</header>
+
+
+<body>
+        <div style="padding-left: 2%; padding-top: 8%; padding-right: 2%">
+
+            <h1><img width="60px" src="{% static 'image/Option_commande/menu2.png' %}"> Gérer mes menus</h1>
+            <h4>Entreprise : {{ nom_entreprise }}</h4>
+
+            <div style="padding-top: 3%; padding-bottom: 3%; display: block; margin-left: auto; margin-right: auto;">
+                <!------ BUTTONS : Trigger Modal ------>
+                <a><button type="button" class="btn btn-outline-dark" data-toggle="modal" data-target="#modal_add_article">Ajouter un élément</button></a>
+                <!--<button type="button" class="btn btn-outline-dark" data-toggle="modal" data-target="#modal_add_categorie">Ajouter une catégorie</button>-->
+
+                <!------ BUTTON : Manage Categories ------>
+                <a href="/manage_categorie/{{ entreprise_id }}"><button type="button" class="btn btn-outline-dark">Gérer mes catégories</button></a>
+                <a href="/manage_qrcode/{{ entreprise_id }}"><button type="button" class="btn btn-outline-dark">Gérer QR-CODES</button></a>
+                <!--<a href="/display_from_qrcode/{{ user.id }}"><button type="button" class="btn btn-outline-dark">Consulter ma page</button></a>-->
+                <a href="/afficher_menu_prenium_membership/{{ entreprise_id }}"><button type="button" class="btn btn-outline-success">Consulter ma page</button></a>
+                <a href="/suivi_commandes/{{ entreprise_id }}"><button type="button" class="btn btn-outline-primary">Suivre les commandes</button></a>
+            </div>
+        </div>
+
+        <!------  TABLE : Menu from DB ------>
+
+        {% if len_articles == 0 %}
+            <div style="margin-left:2%; margin-bottom: 20%">
+                <p style="color: red">Vous n'avez aucun élément</p>
+            </div>
+        {% else %}
+             <div style="width:95%; padding-left:3% ;padding-right:3%; padding-bottom: 5%">
+
+             <form class="form-inline" style="margin-bottom: 2%">
+
+                 <div class="input-group mb-3">
+                     <label>Catégorie : </label>
+                     <input type="text" id="myInput" onkeyup="myFunction()" class="form-control mx-sm-3" placeholder="Chercher une catégorie">
+                 </div>
+
+                 <div class="input-group mb-3">
+                     <label>Nom du menu : </label>
+                     <input type="text" id="myNameInput" onkeyup="search_menu()" class="form-control mx-sm-3" placeholder="Chercher une catégorie">
+                 </div>
+
+                 <!--<div class="input-group mb-3">
+                     <label>Catégorie : </label>
+                     <span class="input-group-text" id="basic-addon1"><ion-icon name="search-sharp"></ion-icon></span>
+                     <input type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1">
+                 </div>-->
+
+
+             </form>
+                 <table class="table table-hover" width="50%"; id="myTable" style="text-align: center" data-pagination="true">
+                     <thead>
+                     <tr>
+                        <th scope="col">Image</th>
+                        <th scope="col">Nom</th>
+                        <th scope="col">Catégorie</th>
+
+                        <th scope="col">Entreprise</th>
+                        <th scope="col">Prix</th>
+                        <th scope="col">Description</th>
+                        <th scope="col">Modifier</th>
+                        <th scope="col">Supprimer</th>
+                    </tr>
+                    </thead>
+                     <tbody>
+                     {% for article in articles %}
+                         <tr>
+                            <td><img style="width: 73px;" src="{{ article.image_path }}" class="img-fluid"></td>
+                            <td>{{ article.nom_article }}</td>
+                            <td>{{ article.nom_categorie }}</td>
+                            <td>{{ article.nom_entreprise }}</td>
+                            <td>{{ article.prix }} €</td>
+                            <td>{{ article.description }}</td>
+                            <td>
+                                <a href="/manage_menu/update_article/{{ article.id }}"><button type="button" class="btn btn-warning"><ion-icon name="create-outline"></ion-icon></button></a>
+                            </td>
+                            <td>
+                                <a href="/manage_menu/masquer_article/{{ article.id }}"><button type="button" class="btn btn-danger"><ion-icon name="trash-outline"></ion-icon></button></a>
+                            </td>
+                         </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+         </div>
+        {% endif %}
+
+   <!------  MODAL : Add Article ------>
+        <div class="modal fade" id="modal_add_article" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLongTitle">Ajouter un article</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        {% include '06_QRCODE/03_Create/add_article.html' %}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!------  MODAL : Add Catégorie ------>
+        <div class="modal fade" id="modal_add_categorie" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLongTitle">Ajouter une catégorie</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        {% include '06_QRCODE/03_Create/add_categorie.html' %}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+<!------  MODAL : UPDATE Article ------>
+        <div class="modal fade" id="modal_update_article" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLongTitle">Modifier élément</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        {% include '06_QRCODE/05_Update/update_article2.html' %}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <footer>
+            {% include '00_Layout/footer2.html' %}
+        </footer>
+
+    </body>
+</html>
+
+<script>
+function myFunction() {
+    var input, filter, table, tr, td, i, txtValue;
+    input = document.getElementById("myInput");
+    filter = input.value.toUpperCase();
+    table = document.getElementById("myTable");
+    tr = table.getElementsByTagName("tr");
+    for (i = 0; i < tr.length; i++) {
+        td = tr[i].getElementsByTagName("td")[2];
+        if (td) {
+            txtValue = td.textContent || td.innerText;
+            if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                tr[i].style.display = "";
+            } else {
+                tr[i].style.display = "none";
+            }
+        }
+    }
+}
+
+function search_menu() {
+  var input, filter, table, tr, td, i, txtValue;
+  input = document.getElementById("myNameInput");
+  filter = input.value.toUpperCase();
+  table = document.getElementById("myTable");
+  tr = table.getElementsByTagName("tr");
+  for (i = 0; i < tr.length; i++) {
+    td = tr[i].getElementsByTagName("td")[1];
+    if (td) {
+      txtValue = td.textContent || td.innerText;
+      if (txtValue.toUpperCase().indexOf(filter) > -1) {
+        tr[i].style.display = "";
+      } else {
+        tr[i].style.display = "none";
+      }
+    }
+  }
+}
+</script>
+

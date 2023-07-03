@@ -1,0 +1,35 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+        <head>
+            <meta charset="UTF-8">
+            <title>Title</title>
+        </head>
+
+        <header>
+            {% include '00_Layout/header.html' %}
+        </header>
+        <body style="background-color: rgba(239,239,239,0.84)" onLoad="preLoad()">
+
+            <form autocomplete="off">
+              <input type="radio" name="1" onClick="im('a1');" checked>
+              <input type="radio" name="1" onClick="im('a2');">
+              <input type="radio" name="1" onClick="im('a3');">
+            </form>
+
+            <img id="a" src="images/pitAuto.jpg" width="802" height="602" alt="">
+        </body>
+
+
+    <script>
+    function preLoad() {
+      a1 = new Image; a1.src = 'image/snapchat.png';
+      a2 = new Image; a2.src = 'image/snapchat.png';
+      a3 = new Image; a3.src = 'snapchat.png';
+    }
+    function im(image) {
+      document.getElementById(image[0]).src = eval(image + ".src")
+    }
+    </script>
+</html>

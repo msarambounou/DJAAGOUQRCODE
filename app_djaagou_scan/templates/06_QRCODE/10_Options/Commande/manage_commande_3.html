@@ -1,0 +1,107 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Title</title>
+    </head>
+    <header>
+        {% include '00_Layout/header.html' %}
+    </header>
+    <body>
+        <div style="padding-top: 8%; padding-left: 2%; padding-right: 2%; margin-bottom: 5%">
+
+            <h1><img width="60px" src="{% static 'image/Option_commande/suivi.png' %}">Gérer les commandes</h1>
+
+            <div id="container" style="padding-top: 2%">
+                <div style="width: 15%; display: flex;">
+                    <label style="padding-right: 10%; padding-top: 2%">Statut: </label>
+                    <select class="custom-select" id="select1">
+                        <option value="all" selected>Tout</option>
+                        <option value="0">En préparation</option>
+                        <option value="1">Livré</option>
+                    </select>
+                </div>
+
+              <div style="display: flex; flex-wrap: wrap; margin-top: 1%">
+                  {% for this_commande in distinct_commandes %}
+
+                  <div class="item {{ this_commande.4 }}" style="padding: 2%;">
+                      {% if this_commande.4 == 0 %}
+                          <div class="card text-bg-success mb-3" style="background-color: orange;">
+                      {% else %}
+                          <div class="card text-bg-success mb-3" style="background-color: green;">
+                      {% endif %}
+
+                          <div class="card-header" style="text-align: center">
+                              <b>TABLE {{ this_commande.1 }}</b>
+                          </div>
+
+                          <div class="card-body">
+                              <h6><b>NOM :</b> {{ this_commande.2 }}</h6>
+                          </br>
+                              <h6><b>COMMANDES :</b></h6>
+                              {% for achat in achats %}
+                                  {% for article in articles %}
+                                      {% if article.id == achat.id_menu and achat.id_commande == this_commande.0 %}
+                                          <li>{{ article.nom_article }} x{{ achat.quantite }}</li>
+                                      {% endif %}
+                                  {% endfor %}
+                              {% endfor %}
+
+                          </br>
+
+                              {% if this_commande.4 == 0 %}
+                                  <h6><b>STATUT : </b></h6>
+                                  <p>En préparation</p>
+                              {% else %}
+                                   <h6><b>STATUT : </b></h6>
+                                  <p>Livré</p>
+                              {% endif %}
+                          </br>
+                              <h6><b>Heure : </b>{{ this_commande.3 }}</h6>
+                          {% if this_commande.4 == 0 %}
+                             <a href="/confirmer_livraison/{{ this_commande.0 }}"><button style="width: 100%" type="button" class="btn btn-outline-light">Confirmer livraison</button></a>
+                          {% endif %}
+                          </div>
+                  </div>
+
+                  </div>
+
+                  {% endfor %}
+
+              </div>
+            </div>
+            </div>
+    </div>
+
+    </body>
+
+</html>
+
+
+
+<script>
+    const container = document.getElementById("container");
+    const items = container.getElementsByClassName("item");
+    const select1 = document.getElementById("select1");
+
+    select1.addEventListener("change", function() {
+        filter();
+    });
+
+    function filter() {
+        const selectedOption = select1.value;
+
+        for (let i = 0; i < items.length; i++) {
+            let item = items[i];
+            if (selectedOption === "all" || item.classList.contains(selectedOption)) {
+                item.style.display = "block";
+            } else {
+                item.style.display = "none";
+            }
+        }
+    }
+
+</script>
+

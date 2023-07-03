@@ -1,0 +1,104 @@
+{% include '00_Layout/header.html' %}
+</br></br></br></br></br></br></br></br></br>
+<table>
+  <tr>
+    <td>Ligne 1, colonne 1</td>
+    <td>Ligne 1, colonne 2</td>
+  </tr>
+  <tr>
+    <td>Ligne 2, colonne 1</td>
+    <td>Ligne 2, colonne 2</td>
+  </tr>
+    <tr>
+    <td>Ligne 2, colonne 1</td>
+    <td>Ligne 2, colonne 2</td>
+  </tr><tr>
+    <td>Ligne 2, colonne 1</td>
+    <td>Ligne 2, colonne 2</td>
+  </tr><tr>
+    <td>Ligne 2, colonne 1</td>
+    <td>Ligne 2, colonne 2</td>
+  </tr><tr>
+    <td>Ligne 2, colonne 1</td>
+    <td>Ligne 2, colonne 2</td>
+  </tr><tr>
+    <td>Ligne 2, colonne 1</td>
+    <td>Ligne 2, colonne 2</td>
+  </tr><tr>
+    <td>Ligne 2, colonne 1</td>
+    <td>Ligne 2, colonne 2</td>
+  </tr><tr>
+    <td>Ligne 2, colonne 1</td>
+    <td>Ligne 2, colonne 2</td>
+  </tr><tr>
+    <td>Ligne 2, colonne 1</td>
+    <td>Ligne 2, colonne 2</td>
+  </tr><tr>
+    <td>Ligne 2, colonne 1</td>
+    <td>Ligne 2, colonne 2</td>
+  </tr><tr>
+    <td>Ligne 2, colonne 1</td>
+    <td>Ligne 2, colonne 2</td>
+  </tr><tr>
+    <td>Ligne 2, colonne 1</td>
+    <td>Ligne 2, colonne 2</td>
+  </tr><tr>
+    <td>Ligne 2, colonne 1</td>
+    <td>Ligne 2, colonne 2</td>
+  </tr><tr>
+    <td>Ligne 2, colonne 1</td>
+    <td>Ligne 2, colonne 2</td>
+  </tr><tr>
+    <td>Ligne 2, colonne 1</td>
+    <td>Ligne 2, colonne 2</td>
+  </tr>
+</table>
+
+<nav aria-label="Page navigation example">
+  <ul class="pagination">
+    <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+    <li class="page-item"><a class="page-link" href="#">1</a></li>
+    <li class="page-item"><a class="page-link" href="#">2</a></li>
+    <li class="page-item"><a class="page-link" href="#">3</a></li>
+    <li class="page-item"><a class="page-link" href="#">Next</a></li>
+  </ul>
+</nav>
+
+<script>
+    var current_page = 1;
+var records_per_page = 5;
+
+function prevPage() {
+  if (current_page > 1) {
+    current_page--;
+    changePage(current_page);
+  }
+}
+
+function nextPage() {
+  if (current_page < numPages()) {
+    current_page++;
+    changePage(current_page);
+  }
+}
+
+function changePage(page) {
+  var btn_next = document.getElementById("btn_next");
+  var btn_prev = document.getElementById("btn_prev");
+  var table = document.getElementById("my_table");
+  var page_span = document.getElementById("page");
+
+  // Valider page
+  if (page < 1) page = 1;
+  if (page > numPages()) page = numPages();
+
+  table.innerHTML = "";
+
+  for (var i = (page-1) * records_per_page; i < (page * records_per_page) && i < objJson.length; i++) {
+    var row = table.insertRow(i);
+    var cell1 = row.insertCell(0);
+    var cell2 = row.insertCell(1);
+    cell1.innerHTML = objJson[i].col1;
+    cell2.inner
+
+</script>

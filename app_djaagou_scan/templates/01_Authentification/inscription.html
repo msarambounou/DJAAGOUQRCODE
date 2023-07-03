@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Title</title>
+        {% load static %}
+    </head>
+
+    <header>
+        {% include '00_Layout/header.html' %}
+    </header>
+    <body style="background-color: rgba(239,239,239,0.84)">
+        <div class="container py-5 h-100">
+            <div class="row d-flex align-items-center justify-content-center h-100" class="container py-5 h-100" style="padding-top: 10%; padding-bottom: 5%">
+                <div class="col-md-7 col-lg-5 col-xl-5 offset-xl-1" style="box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px; padding-left: 5%; padding-right: 5%; padding-bottom: 5%; padding-top: 2%; background-color: white">
+                    </br>
+                    <img src="{%static "image/register/sign-up.png" %}" class="img-fluid" alt="Phone image" style="width: 70%; display: block; margin-left: auto; margin-right: auto;">
+                        {% include '07_Message/messages.html' %}
+                    <form action="/inscription/" method="POST" style="padding-top: 10%"> {% csrf_token %}
+
+                    <!--<div class="form-group">
+                        <label>Genre</label>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" id="exampleRadios1" name="genre" value="Femme" checked>
+                            <label class="form-check-label" id="exampleRadios1" for="exampleRadios1">Femme</label>
+                        </div>
+
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" id="exampleRadios2" name="genre" value="Homme">
+                            <label class="form-check-label" id="exampleRadios2" for="exampleRadios2">Homme</label>
+                        </div>
+                    </div>-->
+
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Nom</label>
+                        <input type="text" class="form-control" id="lastname" name="last_name" placeholder="Veuillez entrez votre nom" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Prenom</label>
+                        <input type="text" class="form-control" id="firstname" name="first_name" placeholder="Veuillez entrez votre prenom" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Email</label>
+                        <input type="email" class="form-control" name="email" placeholder="Veuillez entrez votre email" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Mot de passe</label>
+                        <input type="password" class="form-control" name="password" placeholder="Veuillez entrez votre mot de passe" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Confirmer mot de passe</label>
+                        <input type="password" class="form-control" name="confirme_password" placeholder="Veuillez confirmer de mot de passe" required>
+                    </div>
+
+                    {% include "07_Message/message_info.html" %}
+
+                    <button type="submit" class="btn btn-primary">S'inscrire</button>
+                </form>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
+
+{% include '00_Layout/footer2.html' %}

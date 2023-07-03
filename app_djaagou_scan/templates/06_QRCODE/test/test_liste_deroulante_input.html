@@ -1,0 +1,87 @@
+{% include '00_Layout/header.html' %}
+</br></br></br></br></br></br></br></br></br></br>
+
+<div class="form-group">
+  <label for="contactType">Type de contact :</label>
+  <select class="form-control" id="contactType">
+    <option value="">Sélectionnez un type</option>
+    <option value="phone">Numéro de téléphone</option>
+    <option value="email">Email</option>
+    <option value="test">TEST</option>
+  </select>
+</div>
+
+<div class="form-group" id="contactInputContainer">
+  <!-- Le champ de saisie sera ajouté ici dynamiquement à l'aide de JavaScript -->
+</div>
+
+<div class="form-group" id="div" style="display: none">
+  <label>TEST</label>
+  <input type="password">
+</div>
+
+<script>
+const select = document.querySelector("#contactType");
+const container = document.querySelector("#contactInputContainer");
+
+select.addEventListener("change", event => {
+  // Réinitialiser le champ de saisie
+  container.innerHTML = "";
+
+  // Récupérer la valeur sélectionnée
+  const value = event.target.value;
+
+  if (value === "test") {
+    // Récupérer la liste déroulante et le conteneur de saisie
+const select = document.querySelector("#country");
+const container = document.querySelector("#contactInputContainer");
+
+// Charger les pays à partir de l'API
+fetch("https://restcountries.com/v2/all")
+  .then(response => response.json())
+  .then(countries => {
+    // Boucle sur les pays pour les ajouter à la liste déroulante
+    for (const country of countries) {
+      const option = document.createElement("option");
+      option.value = country.alpha2Code;
+      option.innerText = country.name;
+      select.appendChild(option);
+    }
+  });
+
+// Ajouter un écouteur d'événement pour la liste déroulante
+select.addEventListener("change", event => {
+  // Réinitialiser le champ de saisie
+  container.innerHTML = "";
+
+  // Ajouter un champ de saisie pour le numéro de téléphone
+  const input = document.createElement("input");
+  input.type = "tel";
+  input.className = "form-control";
+  input.id = "contactValue";
+  input.placeholder = "Entrez votre numéro de téléphone";
+  container.appendChild(input);
+});
+
+  }
+
+  // Vérifier la valeur sélectionnée
+  else if (value === "phone") {
+    // Ajouter un champ de saisie pour le numéro de téléphone
+    const input = document.createElement("input");
+    input.type = "tel";
+    input.className = "form-control";
+    input.id = "contactValue";
+    input.placeholder = "Entrez votre numéro de téléphone";
+    container.appendChild(input);
+  } else {
+    // Ajouter un champ de saisie pour l'email
+    const input = document.createElement("input");
+    input.type = "email";
+    input.className = "form-control";
+    input.id = "contactValue";
+    input.placeholder = "Entrez votre adresse email";
+    container.appendChild(input);
+  }
+});
+</script>

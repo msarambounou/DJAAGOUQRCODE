@@ -1,0 +1,83 @@
+<div>
+    <h1 class="display-4">Mon Profile</h1>
+    </br>
+    <h4>Confidentialité</h4>
+    <div style="box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;">
+
+        <table class="table table-hover">
+            <tr>
+                <th scope="col">Prénom</th>
+                <td>{{ user.first_name }}</td>
+                <td><a href="#">Modifier</a></td>
+            </tr>
+
+            <tr>
+                <th scope="col">Nom</th>
+                <td>{{ user.last_name }}</td>
+                <td><a href="#">Modifier</a></td>
+            </tr>
+
+            <tr>
+                <th scope="col">Email</th>
+                <td>{{ user.email }}</td>
+                <td><a href="#">Modifier</a></td>
+            </tr>
+
+            <tr>
+                <th scope="col">Mot de passe</th>
+                <td>**********</td>
+                <td><a href="#">Modifier</a></td>
+            </tr>
+
+            <!--<tr>
+                <th scope="col">Action</th>
+                <td><a href="#">Modifier</a></td>
+            </tr>-->
+        </table>
+    </div>
+    </br>
+
+    <h4>Mes entreprises</h4>
+    <div style="box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;">
+    <table class="table table-hover" width="50%">
+        <thead>
+            <tr>
+                <th scope="col">Nom</th>
+                <th scope="col">Secteur</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            <tr>
+                <td>MC DONALD'S</td>
+                <td>Restaurant</td>
+            </tr>
+        </tbody>
+    </table>
+        </div>
+
+    </br>
+
+    <h4>Mon abonnement</h4>
+    <div style="box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;">
+    <table class="table table-hover" width="50%">
+        <thead>
+            <tr>
+                <th scope="col">Abonnement</th>
+                <th scope="col">Situations</th>
+                <th scope="col">Type</th>
+                <th scope="col">Date de souscription</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            <tr>
+                <td>SIMPLE</td>
+                <td>Activé</td>
+                <td>Annuelle</td>
+                <td>01/01/2022</td>
+            </tr>
+        </tbody>
+    </table>
+    </div>
+</div>

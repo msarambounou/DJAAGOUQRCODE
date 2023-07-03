@@ -1,0 +1,30 @@
+<div>
+    <h1 class="display-4">Hello, {{ user.first_name }}</h1>
+    </br>
+    <table class="table table-hover">
+        <tr>
+            <th scope="col">Prénom</th>
+            <td>{{ user.first_name }}</td>
+        </tr>
+
+        <tr>
+            <th scope="col">Nom</th>
+            <td>{{ user.last_name }}</td>
+        </tr>
+
+        <tr>
+            <th scope="col">Email</th>
+            <td>{{ user.email }}</td>
+        </tr>
+
+        <tr>
+            <th scope="col">Mot de passe</th>
+            <td>**********</td>
+        </tr>
+
+        <tr>
+            <th scope="col">Action</th>
+            <td><a href="#">Modifier</a></td>
+        </tr>
+    </table>
+</div>

@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="fr">
+    <head>
+        <meta charset="UTF-8">
+        <title>Gestion entreprises</title>
+        {% load static %}
+    </head>
+
+    <header>
+        {% include '00_Layout/header.html' %}
+    </header>
+
+    <body>
+        <div style="margin-left: 2%; margin-top: 8%; margin-right: 2%; margin-bottom: 2%">
+            <h1><img width="50px" src="{% static 'image/categorie/categories.png' %}"> Gérer mes catégories</h1>
+            <h4>Entreprise : {{ entreprise }}</h4>
+
+
+            <!--<p>Ajouter TOOLTIP</p>-->
+            <div style="margin-top: 3%; display: block; margin-left: auto; margin-right: auto;">
+                <button type="button" class="btn btn-outline-dark" data-toggle="modal" data-target="#modal_add_categorie">
+                    Ajouter une catégorie
+                </button>
+            </div>
+        </div>
+
+        {% if len_categories == 0 %}
+            <div style="margin-top: 2%; margin-left: 2%; margin-bottom: 20%">
+                <p style="color: red">Vous n'avez aucun élément</p>
+            </div>
+        {% else %}
+
+            <div style="width:95%; padding-left:3% ;padding-right:3%; margin-bottom: 9%">
+                <table class="table table-hover" width="50%" style="text-align: center">
+                    <thead>
+                    <tr>
+                        <th scope="col">Nom</th>
+                        <th scope="col">Entreprise</th>
+                        <th scope="col">Modifier</th>
+                        <th scope="col">Supprimer</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+
+                    {% for categorie in categorie_article %}
+                    <tr>
+                        <td>{{ categorie.nom_categorie_article }}</td>
+                        <td>{{ categorie.nom_entreprise }}</td>
+                        <td>
+                            <a href="update_categorie/{{ categorie.id }}">
+                                <button type="button" class="btn btn-warning">
+                                    <ion-icon name="create-outline"></ion-icon>
+                                </button>
+                            </a>
+                        </td>
+                        <td>
+                            <a href="/manage_categorie/masquer_categorie/{{ categorie.id }}">
+                                <button type="button" class="btn btn-danger">
+                                    <ion-icon name="trash-outline"></ion-icon>
+                                </button>
+                            </a>
+                        </td>
+                    {% endfor %}
+                    {% endif %}
+                </tr>
+
+                </tbody>
+            </table>
+        </div>
+        </div>
+    </body>
+
+    <footer>
+        {% include '00_Layout/footer2.html' %}
+    </footer>
+
+        <!------  MODAL : Add Catégorie ------>
+        <div class="modal fade" id="modal_add_categorie" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLongTitle">Ajouter une catégorie</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        {% include '06_QRCODE/03_Create/add_categorie.html' %}
+                    </div>
+                </div>
+            </div>
+        </div>
+</html>

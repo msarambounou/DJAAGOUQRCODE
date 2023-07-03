@@ -1,0 +1,35 @@
+
+                    <form action="/manage_menu/update_article/{{ article_id }}" method="POST" enctype="multipart/form-data"> {% csrf_token %}
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Nom de l'article</label>
+                            <input type="text" class="form-control" id="article_name" name="article_name" placeholder="Veuillez entrez le nom du produit" value="{{ article.nom_article }}" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="exampleFormControlSelect1">Catégorie</label>
+                            <select class="custom-select" id="exampleFormControlSelect1" name="categorie_article" required>
+                                {% for category in categorie_articles %}
+                                    <option>{{ category.nom_categorie_article }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Prix</label>
+                            <input type="float" class="form-control" id="price" name="price" placeholder="Veuillez entrez le prix du produit" value="{{ article.prix }}"required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="exampleFormControlTextarea1">Description</label>
+                            <textarea class="form-control" id="exampleFormControlTextarea1" name="description" rows="3" placeholder="Veuillez entrer la description du produit" required>{{ article.description }}</textarea>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="exampleFormControlFile1">Photo</label>
+                            <input type="file" class="form-control-file" id="input_img_article" name="image" multiple accept="image/*" value="{{ article.image_path }}" required>
+                            <img id="img_article"style="width: 73px;" class="img-fluid">
+                            <p>Image avant modification</p>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary">Modifier</button>
+                    </form>

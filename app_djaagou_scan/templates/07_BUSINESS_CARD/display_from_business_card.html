@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="fr">
+{% load static %}
+<link rel= "stylesheet" type= "text/css" href= "{% static 'style/display_BS.css' %}">
+    <head>
+        <meta charset="UTF-8">
+        <title>Rejoignez-nous</title>
+    </head>
+    <body>
+
+        <div class="header">
+          <h1>Rejoignez-nous sur les réseaux sociaux !</h1>
+          <p>Cliquez sur les liens</p>
+        </div>
+
+        <div>
+        <h1></h1>
+        </div>
+
+        {% for my_rs_link in rs_link %}
+            <div class="center" style="display: inline-block;">
+                <a href="{{ my_rs_link.link }}"><img class="logo" src="{{ my_rs_link.image_path }}"></a>
+            </div>
+        {% endfor %}
+
+    </body>
+</html>

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Title</title>
+    </head>
+
+    <header>
+        {% include '00_Layout/header.html' %}
+    </header>
+
+    <body style="background-color: rgba(239,239,239,0.84)">
+        <section class="vh-100">
+            <div class="container py-5 h-100">
+                <div class="row d-flex align-items-center justify-content-center h-100" class="container py-5 h-100">
+                    <!--<div class="col-md-8 col-lg-7 col-xl-6">
+                        {% load static %} <img src="{%static "image/inscription.jpg" %}" class="img-fluid" alt="Phone image">
+                    </div>-->
+                    <div class="col-md-7 col-lg-5 col-xl-5 offset-xl-1" style="box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px; margin-left: 5%; margin-right: 5%; margin-bottom: 5%; margin-top: 10%; background-color: white; padding : 3% 3% 3% 3%">
+                    <h3 style="text-align: center">Supprimer</h3>
+                        </br>
+                        {% include '07_Message/messages.html' %}
+                        <form method="POST" enctype="multipart/form-data"> {% csrf_token %}
+                                <fieldset disabled>
+
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail1">Nom de l'entreprise</label>
+                                        <input type="text" class="form-control" name="name_ets" value="{{ entreprise.nom_ets }}" required>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="exampleFormControlSelect1">Secteur</label>
+                                        <input type="text" class="form-control" name="categorie_ets" value="{{ entreprise.secteur }}" required>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="exampleFormControlFile1">Logo</label>
+                                        </br>
+                                        <img style="width: 73px;" src="{{ entreprise.logo_ets }}" class="img-fluid">
+                                    </div>
+                                </fieldset>
+                        </form>
+                        <button class="btn btn-danger" data-toggle="modal" data-target="#modal_delete_entreprise">Supprimer</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="modal fade" id="modal_delete_entreprise" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLongTitle">Attention</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+
+                    <div class="modal-body">
+                        <form action="/supprimer_entreprise/{{ entreprise.id }}" method="POST" enctype="multipart/form-data"> {% csrf_token %}
+                            <p>Voulez-vous vraiment supprimer l'entreprise : {{ entreprise.nom_ets }} ?</p>
+                            <div class="modal-footer">
+                                <button type="submit" class="btn btn-danger">Confirmer</button>
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+    <footer>
+        {% include '00_Layout/footer2.html' %}
+    </footer>
+</html>
+

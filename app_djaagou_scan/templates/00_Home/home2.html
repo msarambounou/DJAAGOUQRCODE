@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+    {% load static %}
+    <head>
+        <meta charset="UTF-8">
+        <title>Accueil</title>
+        <link rel="shortcut icon" href="{% static 'image/favicon-16x16.png' %}"/>
+    </head>
+
+    <body>
+
+        {% include "00_Layout/header.html" %}
+
+        <div style="width: 30%">{% include "07_Message/messages.html" %}</div>
+        </br>
+            <div id="home_slider">
+                {% include '00_Home/slider/home_slider.html' %}
+            </div>
+        </div>
+
+
+        <div style="padding-left: 2%; padding-right: 2%; background-color: rgb(245,241,241)">
+            </br>
+            <h1 class="display-4">Nos solutions</h1>
+            </br>
+            <div id="#home_div" class="card-deck">
+                {% include '00_Home/image_gallery/image_gallery_3.html' %}
+            </div>
+            </br></br>
+        </div>
+
+
+        <!--
+        <div style="padding-left: 2%; padding-right: 2%;">
+            </br>
+            <h1 class="display-4">Retours de nos clients</h1>
+            {% include '00_Home/note/customer_mark.html' %}
+            </br></br>
+        </div>
+        -->
+
+
+        {% include '00_Layout/footer2b.html' %}
+    </body>
+</html>
+<!-- https://www.projectlibre.com -->
+<!-- https://www.w3schools.com/css/css_image_gallery.asp -->

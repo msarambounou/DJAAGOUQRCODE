@@ -1,0 +1,84 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Title</title>
+    </head>
+    <header>
+        {% include '00_Layout/header.html' %}
+    </header>
+    <body>
+        <div style="padding-top: 8%; padding-left: 2%; padding-right: 2%; margin-bottom: 5%">
+
+            <h1><img width="60px" src="{% static 'image/Option_commande/suivi.png' %}">Gérer les commandes</h1>
+
+            <div id="container" style="padding-top: 2%">
+                <div style="width: 18%; display: flex;">
+                    <label style="padding-right: 10%; padding-top: 2%">Statut: </label>
+                    <select class="custom-select" id="select1">
+                        <option value="all" selected>Tout</option>
+                        <option value="En préparation">En préparation</option>
+                        <option value="Terminé">Terminé</option>
+                    </select>
+                </div>
+
+                <div style="display: flex; flex-wrap: wrap; padding-left: 3%; padding-top: 2%">
+                    {% for this_commande in distinct_commandes %}
+                        {% if this_commande.4 == 0 %}
+                            <div class="card" id="item {{ this_commande.4 }}" style="width: 15%; background-color: orange; margin-right: 3%; margin-top: 2%">
+                        {% else %}
+                            <div class="card" id="item {{ this_commande.4 }}" style="width: 15%; background-color: green; margin-right: 3%; margin-top: 2%">
+                        {% endif %}
+
+                        <div class="card-body">
+                            <h5 class="card-title">TABLE {{ this_commande.1 }}</h5>
+                            <h6>Nom : {{ this_commande.2 }}</h6>
+                            {% if this_commande.4 == 0 %}
+                                <div style="display: flex">
+                                    <h6>Statut: </h6><h6 id="statut">En préparation</h6>
+                                </div>
+                            {% else %}
+                                <div style="display: flex">
+                                    <h6>Statut :</h6><h6 id="statut">Terminé</h6>
+                                </div>
+                            {% endif %}
+                            <h6>Heure: {{ this_commande.3 }}</h6>
+                            {% if this_commande.4 == 0 %}
+                                <a href="/confirmer_livraison/{{ this_commande.0 }}">
+                                    <button style="width: 100%" type="button" class="btn btn-outline-light">
+                                        Accéder
+                                    </button>
+                                </a>
+                            {% endif %}
+                        </div>
+                    </div>
+                  {% endfor %}
+                  </div>
+              </div>
+            </div>
+        </div>
+    </body>
+</html>
+
+
+
+<script>
+    const select1 = document.getElementById('select1');
+    const cards = document.querySelectorAll('.card');
+
+    select1.addEventListener('change', () => {
+        const selectedValue = select1.value;
+
+        cards.forEach(card => {
+            const statut = card.querySelector('#statut').textContent;
+            if (selectedValue === 'all' || statut === selectedValue) {
+                card.style.display = 'block';
+            } else {
+                card.style.display = 'none';
+            }
+        });
+    });
+</script>
+
+

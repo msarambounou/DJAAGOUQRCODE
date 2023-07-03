@@ -1,0 +1,14 @@
+<form action="#" method="POST" enctype="multipart/form-data"> {% csrf_token %}
+
+    <div class="form-group">
+        <label>Numéro de la table</label>
+        <input type="number" class="form-control" id="price" name="price" placeholder="Entrez le numéro de la table" min="0" step="1" required>
+    </div>
+
+    <div class="form-group">
+        <label>PRIX TOTAL</label>
+        <h5>100 €</h5>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Valider</button>
+</form>

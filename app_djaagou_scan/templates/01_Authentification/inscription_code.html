@@ -1,0 +1,27 @@
+{% include '00_Layout/header.html' %}
+{% load static %}
+<section class="vh-100">
+    <div class="container py-5 h-100">
+        <div class="row d-flex align-items-center justify-content-center h-100">
+            <div class="col-md-8 col-lg-7 col-xl-6">
+                <h1>CODE DE VALIDATION</h1>
+
+                 <img src="{%static "image/login.jpg" %}" class="img-fluid" alt="Phone image">
+            </div>
+            <div class="col-md-7 col-lg-5 col-xl-5 offset-xl-1">
+                {% include "07_Message/messages.html" %}
+                <form action="/inscription_code/{{ email }}" method="POST"> {% csrf_token %}
+
+                    <div class="form-group">
+                        <label>Code de confirmation</label>
+                        <input type="text" class="form-control" name="code_confirmation" placeholder="Veuillez entrez le code envoyé par mail" required>
+                    </div>
+
+                    {% include "07_Message/message_info.html" %}
+
+                    <button type="submit" class="btn btn-primary">Validier inscription</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>

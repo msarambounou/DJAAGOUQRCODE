@@ -1,0 +1,51 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+{% include '00_Layout/header.html' %}
+</br></br></br></br>
+  <head>
+    <style>
+      .product-card {
+        width: 300px;
+        background-color: white;
+        border-radius: 10px;
+        box-shadow: 0px 0px 10px lightgray;
+        text-align: center;
+        margin: 20px auto;
+        padding: 20px;
+        position: relative;
+      }
+      .product-card img {
+        width: 100%;
+        border-top-left-radius: 10px;
+        border-top-right-radius: 10px;
+        object-fit: cover;
+      }
+      .product-card h3 {
+        margin-top: 20px;
+        font-size: 24px;
+      }
+      .product-card p {
+        margin: 20px 0;
+        font-size: 16px;
+        text-align: left;
+      }
+      .product-card .price {
+        font-size: 24px;
+        font-weight: bold;
+        color: green;
+        position: absolute;
+        bottom: 20px;
+        right: 20px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="product-card">
+      <img src="{% static 'image/facebook.png' %}" alt="Product 1">
+      <h3>Socle QR CODE</h3>
+      <p>Description.....</p>
+      <p class="price">10 €</p>
+    </div>
+  </body>
+</html>

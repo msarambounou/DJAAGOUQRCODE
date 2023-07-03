@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+    {% load static %}
+    <head>
+        <meta charset="UTF-8">
+        <title>Modifier catégorie</title>
+    </head>
+
+    <header>
+        {% include '00_Layout/header.html' %}
+    </header>
+    <body style="background-color: rgba(239,239,239,0.84)">
+        <section class="vh-100">
+            <div class="container py-5 h-100">
+                <div class="row d-flex align-items-center justify-content-center h-100" class="container py-5 h-100">
+                    <div class="col-md-7 col-lg-5 col-xl-5 offset-xl-1" style="box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px; margin-left: 5%; margin-right: 5%; margin-bottom: 5%; margin-top: 10%; background-color: white; padding : 3% 3% 3% 3%">
+                        <h3 style="text-align: center">Modifier catégorie</h3>
+                    </br>
+                    {% include '07_Message/messages.html' %}
+                    <fieldset disabled>
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Entreprise</label>
+                            <input type="text" class="form-control" name="name_ets" value="{{ categorie.nom_entreprise }}" required>
+                        </div>
+                    </fieldset>
+                    <form action="/manage_categorie/update_categorie/{{ categorie_id }}" method="POST" enctype="multipart/form-data"> {% csrf_token %}
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Catégorie</label>
+                            <input type="text" class="form-control" name="categorie_name" value="{{ categorie.nom_categorie_article }}" required>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary">Modifier</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+</body>

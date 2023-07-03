@@ -1,0 +1,118 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Title</title>
+    </head>
+
+    <header>
+        {% include '00_Layout/header.html' %}
+    </header>
+    <body style="background-color: rgba(239,239,239,0.84)">
+    <section class="vh-100">
+        <div class="container py-5 h-100">
+            <div class="row d-flex align-items-center justify-content-center h-100" class="container py-5 h-100" style="display: block;margin-left: auto;margin-right: auto;">
+                <div class="col-md-7 col-lg-5 col-xl-5 offset-xl-1" style="box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px; padding-left: 5%; padding-right: 5%; padding-bottom: 5%; padding-top: 2%; background-color: white;">
+                <h3 style="text-align: center">QR-CODE</h3>
+                    </br>
+                    {% include '07_Message/messages.html' %}
+
+                    <form action="/ajouter_qrcode/{{ entreprise.id }}" method="POST" enctype="multipart/form-data"> {% csrf_token %}
+                        <fieldset disabled>
+                            <div class="form-group">
+                                <label>Entreprise</label>
+                                <input type="text" class="form-control" name="nom_entreprise" value="{{ entreprise.nom_ets }}" required>
+                            </div>
+                        </fieldset>
+
+                        <div class="form-group">
+
+                            <label>Selectionner un modèle</label></br>
+
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="radio_modele" id="modele1" value="radio_modele1" onclick="input_image()">
+                                <label class="form-check-label" for="modele1">
+                                    Modèle 1
+                                </label>
+                                <button type="button" class="btn btn-link" data-toggle="modal" data-target="#modal_modele1"><ion-icon name="eye-outline"></ion-icon></button>
+                            </div>
+
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="radio_modele" id="modele2" value="radio_modele2" onclick="input_image()">
+                                <label class="form-check-label" for="modele2">
+                                    Modèle 2
+                                </label>
+                                <button type="button" class="btn btn-link" data-toggle="modal" data-target="#modal_modele1"><ion-icon name="eye-outline"></ion-icon></button>
+                            </div>
+
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="radio_modele" id="personalise" onclick="input_image()">
+                                <label class="form-check-label" for="personalise">
+                                    Personaliser
+                                </label>
+                                </br>
+                                <div id="div_input_img" style="display: none">
+                                    Choisir un modèle
+                                    <input type="file" id="modele_personalisé" />
+                                </div>
+                            </div>
+
+                        </div>
+
+                        </br>
+
+                        <button type="submit" class="btn btn-primary">Créer</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!------  MODAL : Add Article ------>
+        <div class="modal fade" id="modal_modele1" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLongTitle">Modèle 1</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <img src="{%static "image/qrcode_model1png.png" %}" style="width: 50%; height: 50%;   display: block; margin-left: auto;margin-right: auto;"/>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="modal_modele2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+           <div class="modal-body">
+               <img src="{%static "image/inscription.jpg" %}" style="width: 200px; height: 200px;"/>
+           </div>
+        </div>
+      </div>
+    </div>
+    </body>
+</html>
+
+{% include '00_Layout/footer2b.html' %}
+
+<script type="text/javascript">
+    function input_image() {
+        var personalise = document.getElementById("personalise");
+        var div_input_img = document.getElementById("div_input_img");
+        div_input_img.style.display = personalise.checked ? "block" : "none";
+    }
+</script>

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="fr">
+{% load static %}
+    <head>
+        <meta charset="UTF-8">
+        <title>Rejoignez-nous</title>
+    </head>
+    <body>
+
+        <div class="header" style="
+        text-align: center;
+        padding-top: 1%;
+        padding-bottom: 1%;
+        color: white;
+        background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(0,212,255,1) 99%);
+        box-shadow: rgba(33, 35, 38, 0.1) 0px 10px 10px -10px;">
+          <h1>Rejoignez-nous sur les réseaux sociaux !</h1>
+          <p>Cliquez sur les liens</p>
+        </div>
+
+        <div>
+        <h1></h1>
+        </div>
+
+        <div style="display: flex; flex-wrap: wrap; margin-top: 3%; margin-left: 2.5%">
+            {% for my_social_media in social_media %}
+                <div class="center" style="padding-left: 2.5%; padding-right: 2.5%; margin-bottom: 3.5%">
+                    <a href="{{ my_social_media.link }}">
+                        <img width="250px" class="logo" src="{{ my_social_media.path_logo }}">
+                    </a>
+                </div>
+            {% endfor %}
+        </div>
+
+    </body>
+</html>

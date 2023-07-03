@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    {% load static %}
+    {% include '00_Layout/header.html' %}
+</head>
+
+<body>
+    <div style="margin-left: 3%; margin-top: 10%; margin-bottom: 10%; margin-right: 3%; background-color: #efefef; padding-bottom: 32%">
+
+        <div style="display: flex; background-color: #dedede">
+            <div style="margin-left: 3%; margin-right: 3%; padding-top: 3%; width:15%; display: block">
+                <label>Statut : </label>
+                <div class="form-group">
+                    <select class="custom-select" id="filterByColor" onchange="searchFilter()">
+                        <option value="" selected>Tout</option>
+                        <option value="1">Disponible</option>
+                        <option value="0">Indisponible</option>
+                    </select>
+                </div>
+            </div>
+
+            <div style="margin-left: 3%; margin-right: 3%; padding-top: 3%; width:15%; display: block">
+                <label>Nombre de places</label>
+                <div class="form-group">
+                    <select class="custom-select" id="filterByColor" onkeyup="searchNumberPlace()">
+                        <option value="" selected>Tout</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">4</option>
+                        <option value="6">5</option>
+                        <option value="8">8</option>
+                        <option value="9">9</option>
+                        <option value="10">10</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mt-2" style="margin-left: 3%; margin-right: 3%; padding-top: 5%">
+            <div>
+                {% for table in tables %}
+                    <div class="card {{ table.statut_table }}" style="width: 20%; display: inline-block; margin-right: 3%; margin-bottom: 3%;">
+                        {% if table.statut_table == 1 %}
+                            <img class="img-fluid rounded-start" src="{% static 'image/options/tables/tables_dispo.png' %}" class="img-fluid" style="width: 100%; height: 300px;">
+                        {% else %}
+                            <img class="img-fluid rounded-start" src="{% static 'image/options/tables/tables_indispo.png' %}" class="img-fluid" style="width: 100%; height: 300px;">
+                        {% endif %}
+                        <div class="card-body">
+                            <h5 class="card-text">Table {{ table.numero_table }}</h5>
+
+                        <div style="display: flex">
+                            <h5 class="card-text" id="table_nb_places" style="color: grey">{{ table.nb_places }}</h5><h5 class="card-text" style="color: grey; padding-left: 3%"> places</h5>
+                        </div>
+
+                            {% if table.statut_table == 1 %}
+                                <h6 id="table_statut" style="color:green;">DISPONIBLE</h6>
+                            {% else %}
+                                <h6 id="table_statut" style="color:red;">INDISPONIBLE</h6>
+                            {% endif %}
+                            <a href="/modifier_table/{{ table.id_entreprise }}/{{ table.numero_table }}"><button style="width: 100%" type="button" class="btn btn-dark">Action</button></a>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</body>
+<footer>
+    {% include '00_Layout/footer2.html' %}
+</footer>
+</html>
+
+{% include '00_Modal/update_table.html' %}
+
+<!-- This is Bootstrap -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous">
+    </script>
+
+
+    <!-- this is javascript-->
+    <script>
+        var searchFilter = () => {
+            let selectedColor = document.getElementById("filterByColor").value;
+            console.log(selectedColor);
+            const input = document.querySelector(".form-control");
+            const cards = document.getElementsByClassName("card");
+            console.log(cards[1])
+            let textBox = input.value;
+            for (let i = 0; i < cards.length; i++) {
+                let title = cards[i].querySelector(".card-body");
+                if ((cards[i].classList.contains(selectedColor) || selectedColor=="") && title.innerText.toLowerCase().indexOf(textBox.toLowerCase()) > -1) {
+                    cards[i].classList.remove("d-none");
+                } else {
+                    cards[i].classList.add("d-none");
+                }
+            }
+        }
+    </script>
+
+
+
+<script>
+    function searchFilter() {
+        // Récupérer la valeur du filtre de statut
+        var statutFilter = document.getElementById('filterByColor').value;
+
+        // Parcourir toutes les tables et afficher celles qui correspondent au filtre de statut
+        var tables = document.getElementsByClassName('card');
+        for (var i = 0; i < tables.length; i++) {
+            var table = tables[i];
+            var statut = table.classList.contains('1') ? "1" : "0";
+            if (statutFilter === "" || statutFilter === statut) {
+                table.style.display = "inline-block";
+            } else {
+                table.style.display = "none";
+            }
+        }
+    }
+
+    function searchNumberPlace() {
+            let selectedColor = document.getElementById("filterByColor").value;
+            console.log(selectedColor);
+            const input = document.querySelector(".form-control");
+            const cards = document.getElementsByClassName("card");
+            console.log(cards[1])
+            let textBox = input.value;
+            for (let i = 0; i < cards.length; i++) {
+                let title = cards[i].querySelector(".card-body");
+                if ((cards[i].classList.contains(selectedColor) || selectedColor=="") && title.innerText.toLowerCase().indexOf(textBox.toLowerCase()) > -1) {
+                    cards[i].classList.remove("d-none");
+                } else {
+                    cards[i].classList.add("d-none");
+                }
+            }
+    }
+</script>

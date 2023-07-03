@@ -1,0 +1,32 @@
+{% include '00_Layout/header.html' %}
+</br></br></br></br></br></br></br></br></br></br></br></br></br></br>
+
+<div class="form-group" style="width: 50%">
+  <label for="phone">Numéro de téléphone :</label>
+  <div class="input-group">
+    <div class="input-group-prepend" style="width: 20%">
+      <select class="custom-select" id="country">
+        <!-- Les options seront ajoutées ici dynamiquement à l'aide de JavaScript -->
+      </select>
+    </div>
+    <input type="tel" class="form-control" id="phone" aria-describedby="phoneHelp">
+  </div>
+  <small id="phoneHelp" class="form-text text-muted">Nous ne partagerons jamais votre numéro de téléphone.</small>
+</div>
+
+<script>
+fetch("https://restcountries.com/v2/all")
+  .then(response => response.json())
+  .then(countries => {
+    // Récupérer la liste déroulante
+    const select = document.querySelector("#country");
+
+    // Boucle sur les pays et ajoutez chaque option à la liste déroulante
+    countries.forEach(country => {
+      const option = document.createElement("option");
+      option.value = country.code;
+      option.text = country.name;
+      select.appendChild(option);
+    });
+  });
+</script>

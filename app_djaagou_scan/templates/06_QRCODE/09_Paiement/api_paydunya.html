@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" type="text/css" href="https://paydunya.com/assets/psr/css/psr.paydunya.min.css">
+</head>
+<body>
+
+<button class="pay" onclick="payWithPaydunya(this)" data-ref="102" data-fullname="Alioune Faye" data-email="aliounefaye@gmail.com" data-phone="774563209">Acheter MacBook Pro (2,000,000 FCFA)</button>
+
+
+<button class="pay" onclick="payWithPaydunya(this)" data-ref="102">Acheter MacBook Pro (2,000,000 FCFA)</button>
+
+<button class="pay" onclick="payWithPaydunya(this)" data-fullname="Alioune Faye" data-email="aliounefaye@gmail.com" data-phone="774563209">Acheter MacBook Pro (2,000,000 FCFA)</button>
+
+
+</body>
+</html>
+
+
+
+<script src="https://code.jquery.com/jquery.min.js"></script>
+<script src="https://paydunya.com/assets/psr/js/psr.paydunya.min.js"></script>
+<script>
+function payWithPaydunya(btn) {
+
+    PayDunya.setup({
+        selector: $(btn),
+        url: "https://[votre-domaine]/paydunya-api",
+        method: "GET",
+        displayMode: PayDunya.DISPLAY_IN_POPUP,
+        beforeRequest: function() {
+            console.log("About to get a token and the url");
+        },
+        onSuccess: function(token) {
+            console.log("Token: " +  token);
+        },
+        onTerminate: function(ref, token, status) {
+            console.log(ref);
+            console.log(token);
+            console.log(status);
+        },
+        onError: function (error) {
+            alert("Unknown Error ==> ", error.toString());
+        },
+        onUnsuccessfulResponse: function (jsonResponse) {
+            console.log("Unsuccessful response ==> " + jsonResponse);
+        },
+        onClose: function() {
+            console.log("Close");
+        }
+    }).requestToken();
+}
+</script>

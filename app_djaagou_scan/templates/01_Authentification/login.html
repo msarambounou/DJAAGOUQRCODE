@@ -1,0 +1,51 @@
+{% include '00_Layout/header.html' %}
+
+<section class="vh-100">
+    <div class="container py-5 h-100">
+        <div class="row d-flex align-items-center justify-content-center h-100" class="container py-5 h-100" style="box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;">
+            <div class="col-md-8 col-lg-7 col-xl-6">
+                {% load static %} <img src="{%static "image/authentification/connexion.png" %}" class="img-fluid" alt="Phone image">
+            </div>
+            <div class="col-md-7 col-lg-5 col-xl-5 offset-xl-1">
+                {% include '07_Message/messages.html' %}
+                <form action="/connexion/" method="POST"> {% csrf_token %}
+                    <!-- Email input -->
+                    <div class="form-outline mb-4">
+                        <label class="form-label" for="form1Example13">Email</label>
+                        <input type="email" id="form1Example13" name="email" class="form-control form-control-lg" placeholder="Entrez votre email" required/>
+                        <p id="email_error" class="text-danger"></p>
+                    </div>
+
+                    <!-- Password input -->
+                    <div class="form-outline mb-4">
+                        <label class="form-label" for="form1Example23">Mot de passe</label>
+                        <input type="password" id="form1Example23" name="password" class="form-control form-control-lg" placeholder="Entrez votre mot de passe" required/>
+                    </div>
+
+                    <div class="d-flex justify-content-around align-items-center mb-4">
+                        <!-- Checkbox -->
+                        <a href="/mot_de_passe_oublie/">Mot de passe oublié ?</a>
+                        <!--<div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="" id="form1Example3" checked />
+                            <label class="form-check-label" for="form1Example3"> Se rappeler de moi </label>
+                        </div>-->
+                    </div>
+                    <!-- Submit button -->
+                    <button type="submit" class="btn btn-primary btn-lg btn-block">Se connecter</button>
+
+                    <!--<div class="divider d-flex align-items-center my-4">
+                    <p class="text-center fw-bold mx-3 mb-0 text-muted">OR</p>
+                    </div>-->
+
+                    <!--<a class="btn btn-primary btn-lg btn-block" style="background-color: #3b5998" href="#!"role="button">
+                    <i class="fab fa-facebook-f me-2"></i>Continue with Facebook
+                    </a>
+                    <a class="btn btn-primary btn-lg btn-block" style="background-color: #55acee" href="#!"role="button">
+                    <i class="fab fa-twitter me-2"></i>Continue with Twitter</a>-->
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% include '00_Layout/footer2b.html' %}

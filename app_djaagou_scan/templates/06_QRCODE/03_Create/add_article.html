@@ -1,0 +1,51 @@
+<form action="/ajouter_article/" method="POST" enctype="multipart/form-data"> {% csrf_token %}
+
+    <div class="form-group">
+        <label>Entreprise</label>
+        </br>
+        <input type="radio" name="my_entreprise" value="{{ nom_entreprise }}" checked="checked" />
+        {{ nom_entreprise }}
+    </div>
+
+    <div class="form-group">
+        <label for="exampleInputEmail1">Nom du produit</label>
+        <input type="text" class="form-control" id="article_name" name="article_name" placeholder="Veuillez entrez le nom du produit" required>
+    </div>
+
+    <div class="form-group">
+        <label for="exampleFormControlSelect1">Catégorie</label>
+        <select class="custom-select" id="exampleFormControlSelect1" name="categorie_article" required>
+            {% for categorie in categorie_article %}
+            <option>{{ categorie.nom_categorie_article }}</option>
+            {% endfor %}
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="exampleInputEmail1">Prix</label>
+        <input type="number" class="form-control" id="price" name="price" placeholder="Entrez le prix" min="0" step="0.5" required>
+    </div>
+
+    <div class="form-group">
+        <label for="exampleFormControlTextarea1">Description</label>
+        <textarea class="form-control" id="exampleFormControlTextarea1" name="description" rows="3" placeholder="Veuillez entrer la description du produit"></textarea>
+    </div>
+
+    <div class="form-group">
+        <label for="exampleFormControlFile1">Photo</label>
+        <input type="file" class="form-control-file" name="image" multiple accept="image/png, image/jpeg, image/png, image/jpg" onchange="loadFile(event)" required>
+
+         </br>
+        <img id="output" width="150"/>
+        </br>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Soumettre</button>
+</form>
+
+<script>
+var loadFile = function(event) {
+	var image = document.getElementById('output');
+	image.src = URL.createObjectURL(event.target.files[0]);
+};
+</script>

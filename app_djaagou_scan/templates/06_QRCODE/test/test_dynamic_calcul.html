@@ -1,0 +1,16 @@
+{% include '00_Layout/header.html' %}
+</br></br></br></br></br>
+
+<input type="text" id="quantity">
+<p>Prix par unité: $<span id="price">10</span></p>
+<p>Prix total: $<span id="total"></span></p>
+
+<script>
+  const quantityInput = document.getElementById("quantity");
+  const price = document.getElementById("price").innerHTML;
+  const total = document.getElementById("total");
+
+  quantityInput.addEventListener("input", function() {
+    total.innerHTML = quantityInput.value * price;
+  });
+</script>

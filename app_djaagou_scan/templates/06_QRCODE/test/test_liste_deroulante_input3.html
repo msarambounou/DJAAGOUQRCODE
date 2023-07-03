@@ -1,0 +1,71 @@
+{% include '00_Layout/header.html' %}
+</br></br></br></br></br></br></br></br></br></br>
+
+<html>
+  <head>
+    <style>
+      .inputContainer {
+        display: inline-block;
+        width: 100%;
+        text-align: left;
+      }
+    </style>
+    <script>
+
+      function showInput(value) {
+        if (value === "email") {
+          document.getElementById("emailInputContainer").style.display = "block";
+          document.getElementById("numberInputContainer").style.display = "none";
+        } else if (value === "number") {
+          document.getElementById("emailInputContainer").style.display = "none";
+          document.getElementById("numberInputContainer").style.display = "block";
+        }
+      }
+
+
+
+      fetch("https://restcountries.com/v2/all")
+  .then(response => response.json())
+  .then(countries => {
+    // Récupérer la liste déroulante
+    const select = document.querySelector("#country");
+
+    // Boucle sur les pays et ajoutez chaque option à la liste déroulante
+    countries.forEach(country => {
+      const option = document.createElement("option");
+      option.value = country.code;
+      option.text = country.name;
+      select.appendChild(option);
+    });
+  });
+    </script>
+  </head>
+  <body>
+    <select onchange="showInput(this.value)">
+      <option value="">Select an option</option>
+      <option value="email">Email</option>
+      <option value="number">Number</option>
+    </select>
+    <br><br>
+    <div id="emailInputContainer" style="display: none;">
+      <div class="inputContainer">
+        <input type="email" placeholder="Entrer votre email">
+      </div>
+    </div>
+
+    <div id="numberInputContainer" style="display: none;">
+        <label for="phone">Numéro de téléphone :</label>
+      <div class="input-group">
+          <div class="input-group-prepend" style="width: 20%">
+              <select class="custom-select" id="country">
+                  <!-- Les options seront ajoutées ici dynamiquement à l'aide de JavaScript -->
+              </select>
+          </div>
+          <input type="tel" class="form-control" id="phone" aria-describedby="phoneHelp">
+      </div>
+      </div>
+    </div>
+  </body>
+</html>
+
+

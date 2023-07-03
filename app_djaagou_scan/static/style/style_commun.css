@@ -1,0 +1,33 @@
+#home_div22 {
+    padding-left: 2%;
+    padding-right: 2%;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#my_card{
+    width: 320px;
+    height: 380px;
+}
+
+#card_img {
+    width: 318px;
+    height: 250px;
+}
+
+#home_slider{
+    padding-left: 0.5%;
+    padding-right: 0.5%;
+}
+
+#img_slider{
+    height: 400px;
+    width: 100%;
+}
+
+#div_general_card{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Gestion reseau sociaux</title>
+    {% load static %} <link rel= "stylesheet" type= "text/css" href= "{% static "style/style_img_bc.css" %}">
+</head>
+<body>
+    {% include '00_Layout/header.html' %}
+    </br></br>
+    <div style="width: 30%">{% include "07_Message/messages.html" %}</div>
+        <a href="#"><button type="button" class="btn btn-outline-dark" data-toggle="modal" data-target="#modal_add_reseau_social">Ajouter un élément</button></a>
+        <a href="/display_from_business_card/{{ user.id }}"><button type="button" class="btn btn-outline-success">Consulter ma page</button></a>
+    </br></br>
+
+        <div style="width:60%">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th scope="col">Logo</th>
+                        <th scope="col">Réseau sociaux</th>
+                        <th scope="col">Lien</th>
+                        <th scope="col">Action</th>
+                    </tr>
+                </thead>
+
+                {% for my_rs_link in rs_link %}
+                    <tbody>
+                        <tr>
+                            <td><img style="width: 73px;" src="{{ my_rs_link.image_path }}" class="img-fluid"></td>
+                            <td>{{ my_rs_link.name_reseau_social }}</td>
+                            <td><a href="{{ my_rs_link.link }}">{{ my_rs_link.link }}</td></a>
+                          <td>
+                              <a href="update_business_card/{{my_rs_link.id}}"><button type="button" class="btn btn-warning"><ion-icon name="create-outline"></ion-icon>Modifier</button></a>
+                              <a href="delete_business_card/{{my_rs_link.id}}"><button type="button" class="btn btn-danger"><ion-icon name="trash-outline"></ion-icon>Supprimer</button></a>
+                            </td>
+                        </tr>
+                    </tbody>
+                {% endfor %}
+            </table>
+
+            <!------  MODAL : Add Article ------>
+            <div class="modal fade" id="modal_add_reseau_social" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLongTitle">Ajouter un élément</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            {% include '06_QRCODE/03_Create/02_add_reseau_social.html' %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+</body>
+</html>

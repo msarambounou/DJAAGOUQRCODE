@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Modifier menu</title>
+    </head>
+
+    <header>
+        {% include '00_Layout/header.html' %}
+    </header>
+    <body style="background-color: rgba(239,239,239,0.84)">
+        <section class="vh-100">
+            <div class="container py-5 h-100">
+                <div class="row d-flex align-items-center justify-content-center h-100" class="container py-5 h-100">
+                    <div class="col-md-7 col-lg-5 col-xl-5 offset-xl-1" style="box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px; margin-left: 5%; margin-right: 5%; margin-bottom: 5%; margin-top: 10%; background-color: white; padding : 3% 3% 3% 3%">
+                        <h3 style="text-align: center">MA COMMANDE</h3>
+                        </br>
+                        {% include '07_Message/messages.html' %}
+                        <form action="" method="POST" enctype="multipart/form-data"> {% csrf_token %}
+
+                            <div>
+                                <label>Numéro de la table</label>
+                                <input type="number"  name="numero_table" min="0" class="form-control" style="text-align: center" required>
+                            </div>
+
+                            </br>
+
+                            <div>
+                                <label>Votre nom</label>
+                                <input type="text" name="customer_name" class="form-control" style="text-align: center" required>
+                            </div>
+
+                            </br>
+
+                            <div style="background-color: #efefef; padding: 1%; text-align: center">
+                                <h5>PRIX TOTAL : {{ total_price }} €</h5>
+                            </div>
+
+                            </br>
+
+                            <button type="submit" style="width: 100%" class="btn btn-primary">Confirmer</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </body>
+
+<footer>
+    {% include '00_Layout/footer2.html' %}
+</footer>
+</html>

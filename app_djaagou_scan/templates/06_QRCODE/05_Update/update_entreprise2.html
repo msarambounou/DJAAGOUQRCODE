@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Title</title>
+    </head>
+
+    <header>
+        {% include '00_Layout/header.html' %}
+    </header>
+    <body style="background-color: rgba(239,239,239,0.84)">
+    <section class="vh-100">
+        <div class="container py-5 h-100">
+            <div class="row d-flex align-items-center justify-content-center h-100" class="container py-5 h-100">
+                <!--<div class="col-md-8 col-lg-7 col-xl-6">
+                    {% load static %} <img src="{%static "image/inscription.jpg" %}" class="img-fluid" alt="Phone image">
+                </div>-->
+                <div class="col-md-7 col-lg-5 col-xl-5 offset-xl-1" style="box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px; margin-left: 5%; margin-right: 5%; margin-bottom: 5%; margin-top: 10%; background-color: white; padding : 3% 3% 3% 3%">
+                <h3 style="text-align: center">Modification</h3>
+                    </br>
+                    {% include '07_Message/messages.html' %}
+                    <form action="/manage_entreprise/update_entreprise/{{ entreprise.id }}" method="POST" enctype="multipart/form-data"> {% csrf_token %}
+
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">Nom de l'entreprise</label>
+                                <input type="text" class="form-control" name="name_ets" placeholder="Veuillez entrez le nom de l'entreprise" value="{{ entreprise.nom_ets }}" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="exampleFormControlSelect1">Secteur</label>
+                                <select class="custom-select" name="categorie_ets" value="{{ entreprise.nom_categorie_ets }}" required>
+                                    <option selected>{{ entreprise.secteur }}</option>
+                                    {% for categorie in categorie_entreprise %}
+                                        <option>{{ categorie.nom_categorie_ets }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="exampleFormControlSelect1">Devise</label>
+                                <select class="custom-select" name="devise" value="{{ entreprise.nom_devise }}" required>
+                                    {% for my_devise in devise %}
+                                        <option>{{ my_devise.nom_devise }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+
+                        <div class="form-group">
+                            <label>Nombre de places</label>
+                            <input type="number" class="form-control" name="nb_places" placeholder="Veuillez entrez le nombre de places" value="{{ entreprise.nb_places }}" required>
+                        </div>
+
+                            <div class="form-group">
+                                <label for="exampleFormControlFile1">Photo</label>
+
+                                </br>
+
+                                <img id="output" width="150" src="{{ entreprise.logo_ets }}" class="img-fluid">
+
+                                </br>
+                                </br>
+
+                                <input type="file" class="form-control-file" name="image" multiple accept="image/*" onchange="loadFile(event)" value="{{ entreprise.logo_ets }}">
+
+
+                            </div>
+
+                            <button type="submit" class="btn btn-primary">Modifier</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+    </body>
+</html>
+
+{% include '00_Layout/footer2b.html' %}
+
+<script>
+var loadFile = function(event) {
+	var image = document.getElementById('output');
+	image.src = URL.createObjectURL(event.target.files[0]);
+};
+</script>

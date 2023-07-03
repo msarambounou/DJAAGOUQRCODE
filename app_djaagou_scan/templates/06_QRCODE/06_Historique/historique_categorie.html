@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="fr">
+    <head>
+        <meta charset="UTF-8">
+        <title>Historique entreprise</title>
+    </head>
+
+    <header>
+        {% include '00_Layout/header.html' %}
+    </header>
+
+    <body>
+        <div style="margin-left: 2%; margin-top: 8%; margin-right: 2%; margin-bottom: 2%">
+            <h1><ion-icon name="copy-outline"></ion-icon> Historique catégories</h1>
+        </div>
+
+        {% if len_categories == 0 %}
+            <div style="margin-top: 2%; margin-left: 2%; margin-bottom: 21%">
+                <p style="color: red">Vous n'avez aucun élément</p>
+            </div>
+        {% else %}
+
+            <div style="width:80%; padding-left: 2%;padding-right: 2%; margin-bottom: 16%">
+
+                <table class="table table-hover" width="50%" style="text-align: center">
+                    <thead>
+                    <tr>
+                        <th scope="col">Nom</th>
+                        <th scope="col">Entreprise</th>
+                        <th scope="col">Restaurer</th>
+                        <th scope="col">Supprimer</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+
+                    {% for categorie in categories %}
+                    <tr>
+                        <td>{{ categorie.nom_categorie_article }}</td>
+                        <td>{{ categorie.nom_entreprise }}</td>
+                        <td>
+                            <a href="/recuperer_categorie/{{ categorie.id }}">
+                                <button type="button" class="btn btn-success">
+                                    <ion-icon name="reload-outline"></ion-icon>
+                                </button></a>
+                            </a>
+                        </td>
+
+                        <td>
+                            <a href="/supprimer_categorie/{{ categorie.id }}">
+                                <button type="button" class="btn btn-danger">
+                                    <ion-icon name="trash-outline"></ion-icon>
+                                </button>
+                            </a>
+                        </td>
+                    {% endfor %}
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        {% endif %}
+    </body>
+
+    <footer>
+        {% include '00_Layout/footer2.html' %}
+    </footer>
+</html>

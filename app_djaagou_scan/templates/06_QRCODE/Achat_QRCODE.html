@@ -1,0 +1,43 @@
+{% include '00_Layout/header.html' %}
+
+<section class="vh-100">
+    <div class="container py-5 h-100">
+        <div class="row d-flex align-items-center justify-content-center h-100">
+            <div class="col-md-8 col-lg-7 col-xl-6">
+                <h1>COMMANDER UN QR-CODE</h1>
+                {% load static %} <img src="{% static "image/qrcode.jpg" %}" class="img-fluid" alt="Phone image">
+            </div>
+            <div class="col-md-7 col-lg-5 col-xl-5 offset-xl-1">
+                {% include '07_Message/messages.html' %}
+                <form action="#" method="POST"> {% csrf_token %}
+
+                    <!-- Numéro adresse -->
+                    <div class="form-outline mb-4">
+                        <label class="form-label" for="form1Example13">Numéro adresse</label>
+                        <input type="number" id="form1Example13" name="number" class="form-control form-control-lg" placeholder="Entrez votre email" required/>
+                    </div>
+
+                    <!-- Libelle adresse -->
+                    <div class="form-outline mb-4">
+                        <label class="form-label" for="form1Example23">Libellé adresse</label>
+                        <input type="text" id="form1Example23" name="text" class="form-control form-control-lg" placeholder="Entrez votre mot de passe" required/>
+                    </div>
+
+                     <!-- Quantité -->
+                    <div class="form-outline mb-4">
+                        <label class="form-label" for="form1Example13">Quantité</label>
+                        <input type="number" id="form1Example13" name="number" class="form-control form-control-lg" placeholder="Entrez votre email" required/>
+                    </div>
+
+                    <div class="form-outline mb-4">
+                        <h4 class="form-label">Prix total : x €</h4>
+                    </div>
+
+                    <!-- Submit button -->
+                    <button type="submit" class="btn btn-primary btn-lg btn-block">Confirmer ma commande</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+

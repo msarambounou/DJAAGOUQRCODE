@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+    {% load static %}
+    <head>
+        <meta charset="UTF-8">
+        <title>Modifier article</title>
+    </head>
+
+    <header>
+        {% include '00_Layout/header.html' %}
+    </header>
+<body>
+    <section class="vh-100">
+        <div class="container py-5 h-100">
+            <div class="row d-flex align-items-center justify-content-center h-100">
+                <div class="col-md-8 col-lg-7 col-xl-6">
+                    <h3>Modifier : {{ article.nom_article }}</h3>
+                    </br></br></br>
+                    {% load static %} <img src="{{ article.image_path }}" class="img-fluid" alt="Phone image">
+                </div>
+                <div class="col-md-7 col-lg-5 col-xl-5 offset-xl-1">
+                    <form action="/manage_menu/update_article/{{ article_id }}" method="POST" enctype="multipart/form-data"> {% csrf_token %}
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Nom de l'article</label>
+                            <input type="text" class="form-control" id="article_name" name="article_name" placeholder="Veuillez entrez le nom du produit" value="{{ article.nom_article }}" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="exampleFormControlSelect1">Catégorie</label>
+                            <select class="custom-select" id="exampleFormControlSelect1" name="categorie_article" required>
+                                {% for category in categorie_articles %}
+                                    <option>{{ category.nom_categorie_article }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Prix</label>
+                            <input type="float" class="form-control" id="price" name="price" placeholder="Veuillez entrez le prix du produit" value="{{ article.prix }}"required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="exampleFormControlTextarea1">Description</label>
+                            <textarea class="form-control" id="exampleFormControlTextarea1" name="description" rows="3" placeholder="Veuillez entrer la description du produit" required>{{ article.description }}</textarea>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="exampleFormControlFile1">Photo</label>
+                            <input type="file" class="form-control-file" id="input_img_article" name="image" multiple accept="image/*" value="{{ article.image_path }}" required>
+                            <img id="img_article"style="width: 73px;" class="img-fluid">
+                            <p>Image avant modification</p>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary">Modifier</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+</body>

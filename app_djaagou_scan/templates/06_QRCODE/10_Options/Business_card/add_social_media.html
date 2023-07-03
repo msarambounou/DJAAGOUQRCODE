@@ -1,0 +1,70 @@
+{% load static %}
+<form action="/ajouter_reseau_social_business_card/{{ user.id }}" method="POST" enctype="multipart/form-data"> {% csrf_token %}
+
+    <div class="form-group">
+        <label>Réseau social</label>
+        <select class="custom-select" name="name" onchange="showInput(this.value)" required>
+            <option value="choix">Choissiez un reseau social</option>
+            {% for social_media in all_social_media %}
+                <option value="{{ social_media.name }}">{{ social_media.name }}</option>
+            {% endfor %}
+        </select>
+    </div>
+
+    <div class="form-group" id="input_link_container" style="display: none;">
+        <label>Lien</label>
+        <input type="text" class="form-control" name="link" placeholder="Veuillez entrez le lien">
+    </div>
+
+    <div class="form-group" id="input_email_container" style="display: none;">
+        <label>Email</label>
+        <input type="email" class="form-control" name="email" placeholder="Entrez votre email">
+    </div>
+
+    <div id="input_number_container" style="display: none;">
+        <label for="phone">Numéro de téléphone :</label>
+        </br>
+        <small style="color: red">Ecrivez direcetement le numéro sans l'indicateur</small>
+        </br>
+        <div class="input-group">
+            <div class="input-group-prepend" style="width: 30%">
+                <select class="custom-select" id="country" name="country">
+                    <option value="00223">Mali (+223)</option>
+                    <option value="+33">France (+33)</option>
+                    <option value="3">Etat-Unis</option>
+              </select>
+            </div>
+            <input type="number" class="form-control" name="phone_number" id="phone" aria-describedby="phoneHelp">
+        </div>
+        </br>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Soumettre</button>
+</form>
+
+<script>
+    function showInput(value) {
+        if (value === "choix"){
+            document.getElementById("input_number_container").style.display = "none";
+            document.getElementById("input_link_container").style.display = "none";
+            document.getElementById("input_email_container").style.display = "none";
+        }
+        else if (value === "WhatsApp" ) {
+          document.getElementById("input_number_container").style.display = "block";
+          document.getElementById("input_link_container").style.display = "none";
+          document.getElementById("input_email_container").style.display = "none";
+
+        } else if (value === "Email" ) {
+          document.getElementById("input_email_container").style.display = "block";
+          document.getElementById("input_number_container").style.display = "none";
+          document.getElementById("input_link_container").style.display = "none";
+
+        }
+
+        else {
+            document.getElementById("input_email_container").style.display = "none";
+            document.getElementById("input_number_container").style.display = "none";
+            document.getElementById("input_link_container").style.display = "block";
+        }
+    }
+</script>

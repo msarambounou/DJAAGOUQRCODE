@@ -1,0 +1,49 @@
+{% include '00_Layout/header.html' %}
+
+<div class="filter">
+  <select name="year">
+	<option value="all">Please Select</option>
+		<option value="1998">1998</option>
+		<option value="2000">2000</option>
+	</select>
+  <select name="location">
+	<option value="all">Please Select</option>
+		<option value="london">London</option>
+		<option value="paris">Paris</option>
+	</select>
+  <select name="other">
+	<option value="all">Please Select</option>
+		<option value="management-skills">Management Skills</option>
+		<option value="human-resources">Human Resources</option>
+		<option value="finance">Finance</option>
+	</select>
+	<button>reset</button>
+</div>
+
+<table>
+  <tr class="all 2000 london finance">
+    <td>2000</td>
+    <td>London</td>
+    <td>Finance</td>
+  </tr>
+  <tr class="all 1998 paris human-resources">
+    <td>1998</td>
+    <td>Paris</td>
+    <td>Human Resources</td>
+  </tr>
+</table>
+
+<script>
+    $(".filter select").on('change', function() {
+  var filters = $.map($(".filter select").toArray(), function(e) {
+    return $(e).val();
+  }).join(".");
+  $("table").find("tr").hide();
+  $("table").find("tr." + filters).show();
+});
+// Reset
+$('button').on('click', function(){
+		$(".filter select").val( $("option:first").val() );
+		$("table").find("tr").show();
+});
+</script>

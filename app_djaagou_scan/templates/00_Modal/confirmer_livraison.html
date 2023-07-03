@@ -1,0 +1,22 @@
+<div class="modal fade" id="modal_confirmer_livraison" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Message</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+
+            <div class="modal-body">
+                <form action="/confirmer_livraison/{{ this_commande.0 }}/{{ this_commande.5 }}" method="POST" enctype="multipart/form-data"> {% csrf_token %}
+                    <p>Confirmer la livraison de la TABLE {{ this_commande.1 }} ?</p>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary">Confirmer</button>
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">Annuler</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

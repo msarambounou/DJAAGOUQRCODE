@@ -1,0 +1,110 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Title</title>
+    </head>
+    <header>
+        {% include '00_Layout/header.html' %}
+    </header>
+    <body style="">
+
+    <div style="padding-top: 8%; padding-left: 2%">
+        <h1><img width="60px" src="{% static 'image/Option_commande/suivi.png' %}">Gérer les commandes</h1>
+
+
+        <div class="input-group mb-3" style="margin-left: 3%; margin-right: 3%; padding-top: 3%">
+            <label>Statut : </label>
+            <div class="form-group">
+                <select id="filter">
+                    <option value="all">Tout</option>
+                    <option value="0">En préparation</option>
+                    <option value="1">Livré</option>
+                </select>
+            </div>
+        </div>
+
+        <div style="display: flex; flex-wrap: wrap; justify-content: start;">
+
+        {% for this_commande in distinct_commandes %}
+
+        <div style="padding-top: 2%; display: flex; flex-basis: 18%; ">
+
+            {% if this_commande.4 == 0 %}
+                <div class="item {{ this_commande.4 }}" data-category="{{ this_commande.4 }}" style="background-color: #ffb12e; margin-right: 3%; margin-left: 3%;">
+            {% else %}
+            <div class="item {{ this_commande.4 }}" data-category="{{ this_commande.4 }}" style="background-color: green; margin-right: 3%; margin-left: 3%; flex-basis: 100%;">
+            {% endif %}
+                <div class="card-header" style="text-align: center">
+                    <b>TABLE {{ this_commande.1 }}</b>
+                </div>
+                <div class="card-body">
+                    <div style="display: flex">
+                        <p><b>NOM :</b></p>
+                        <p>{{ this_commande.2 }}</p>
+                    </div>
+
+                    <div>
+                        <p><b>COMMANDES: </b></p>
+                    {% for achat in achats %}
+                        {% for article in articles %}
+                            {% if article.id == achat.id_menu and achat.id_commande == this_commande.0 %}
+                                <li>{{ article.nom_article }} x{{ achat.quantite }}</li>
+                            {% endif %}
+                        {% endfor %}
+                    {% endfor %}
+                    </div>
+
+                    </br>
+
+                    <div style="display: flex" class="card-statut">
+                        {% if this_commande.4 == 0 %}
+                            <p><b>STATUT : </b>En préparation</p>
+                        {% else %}
+                            <p><b>STATUT : </b>Livré</p>
+                        {% endif %}
+                    </div>
+
+                    <p><b>Heure : </b>{{ this_commande.3 }}</p>
+
+                {% if this_commande.4 == 0 %}
+                    </br></br>
+                    <a href="/confirmer_livraison/{{ this_commande.0 }}"><button style="width: 80%; position: absolute;bottom: 5%;right: 10%;" type="button" class="btn btn-outline-light">Confirmer livraison </button></a>
+                {% endif %}
+                </div>
+            </div>
+        </div>
+            {% include '00_Modal/confirmer_livraison.html' %}
+        {% endfor %}
+
+
+        </div>
+    </div>
+    </div>
+    </body>
+</html>
+
+<script>
+    const container = document.getElementById("container");
+const items = container.getElementsByClassName("item");
+const select1 = document.getElementById("select1");
+
+select1.addEventListener("change", function() {
+  filter();
+});
+
+function filter() {
+  const selectedOption = select1.value;
+
+  for (let i = 0; i < items.length; i++) {
+    let item = items[i];
+    if (selectedOption === "all" || item.classList.contains(selectedOption)) {
+      item.style.display = "block";
+    } else {
+      item.style.display = "none";
+    }
+  }
+}
+
+</script>

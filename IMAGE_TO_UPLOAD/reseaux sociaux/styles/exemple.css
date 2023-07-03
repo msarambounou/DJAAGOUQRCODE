@@ -1,0 +1,18 @@
+.header {
+  padding: 20px;
+  text-align: center;
+  background: #dadada;
+  color: #131212;
+  font-size: 20px;
+}
+
+.logo {
+  border-radius: 35%;
+  width: 280px;
+  margin-left:20px;
+  margin-bottom: 20px;
+}
+
+.center {
+text-align: center;
+}
